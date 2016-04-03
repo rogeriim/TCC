@@ -1,0 +1,96 @@
+/* Font  
+========================================================================================*/
+
+body { -webkit-text-size-adjust:100%; -moz-text-size-adjust:100%; font-family:Arial, Helvetica, sans-serif; /*color:#736E6C;*/ font-size:13px; line-height:20px; }
+/* h1, h2, h3, h4, h5, h6 { font-family:"PT Serif", Arial, Helvetica, sans-serif; } */
+
+
+/* End Font  
+========================================================================================*/
+
+/* Branding  
+========================================================================================*/
+/* body {margin:0; font-family:Comic Sans MS;} */
+.pageWidth { width:944px; margin:0 auto; padding:0; }
+
+img { vertical-align:top; border:0; max-width:100% }
+
+#logo { display:block; color:#fff; font-size:36px; line-height:60px; text-shadow:1px 1px 0 rgba(107,148,23,0.48); font-weight:bold; margin-bottom:23px;}
+
+#header { padding:1px 0 0 0;
+background: -ms-linear-gradient(176deg, rgba(168,161,158,1) 0%, rgba(0,0,0,1) 100%); /* ie10+ */
+background: -webkit-linear-gradient(176deg, rgba(168,161,158,1) 0%, rgba(0,0,0,1) 100%); /* safari5.1+,chrome10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#A8A19E',GradientType=1;);
+/*border: 1px solid red;*/
+}
+header, nav, section, footer { display:block;}
+
+/* END Branding  
+========================================================================================*/
+
+/* HEADING   
+========================================================================================*/
+
+h1, h2, h3, h4, h5,h6 { color:#736E6C; text-transform:uppercase; font-family:Comic Sans MS; }
+h1 { font-size:38px; line-height:40px;  margin-bottom:10px; }
+h2 { font-size:33px; line-height:40px;  margin-bottom:5px;  }
+h3 { font-size:30px; line-height:35px; margin-bottom:5px;  }
+h4 { font-size:25px; line-height:30px; margin-bottom:5px; }
+h5 { font-size:23px; line-height:25px;  margin-bottom:7px; font-weight:normal; border:none }
+h6 { font-size:20px; line-height:22px;  margin-bottom:7px; font-weight:normal; border:none }
+
+
+/* END  HEADING   
+========================================================================================*/
+
+/* Links AND Button   
+========================================================================================*/
+a:focus{ outline:none;}
+a { text-decoration:none; color:#9d9d9d }
+a:hover { color:#393939 }
+/* Links AND Button   
+========================================================================================*/
+
+
+/* Main Navigation 
+========================================================================================*/
+/*
+nav { font-size:12px; padding:0 0 0 5px }
+nav li { float:left; padding:7px 1px 0 0; position:relative }
+nav li a {  background:rgba(000,000,000,0.3); text-align:center; color:#FFF; border-radius:5px 5px 0 0; line-height:30px; display:inline-block; padding:0 21px 0 21px; text-transform:uppercase; text-decoration: none !important;}
+nav li a:hover, nav li.active a { color:#FFF; background:rgba(000,000,000,0.2)  }
+
+#menu { display:none; color:#ffffff; font-size:14px; background:rgba(000,000,000,0.1); background-repeat:no-repeat; background-position:97% 12px; background-image:url(../img/menu-img.png); padding:15px 0 15px 15px; text-align:left; text-transform:uppercase; }
+*/
+nav li a {font-size: 16px;}
+
+/* End Navigation 
+========================================================================================*/
+#banner { margin:0 0 26px 0;}
+#banner img { width:100% }
+
+#container { padding:26px 0 20px 0; background:#FFF; min-height: 700px;/* border: 1px solid red; */ }
+
+article ul li { padding-left:15px; margin-bottom:3px; }
+article ul li:before{ content:'B'; text-indent:-5px; font-weight:bold; font-size:60px; height:5px; line-height:5px; width:5px; border-radius:10px;  vertical-align:middle; float:left; margin:7px 0 0 -15px; overflow:hidden;}
+article ol { margin-left:15px; }
+article ol li { list-style:decimal; margin-bottom:3px; }
+
+/* FORM 
+========================================================================================*/
+fieldset {}
+/* Footer
+===============================================*/
+#footer {
+background: -ms-linear-gradient(176deg, rgba(168,161,158,1) 0%, rgba(0,0,0,1) 100%); /* ie10+ */
+background: -webkit-linear-gradient(176deg, rgba(168,161,158,1) 0%, rgba(0,0,0,1) 100%); /* safari5.1+,chrome10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#A8A19E',GradientType=1 );
+}
+.copyRight { color:#fff; padding-right:9px; display:block; text-align:center; font-weight:bold; /* border: 1px solid red; */}
+
+/* transition
+===============================================*/
+#wrapper, #widecolumn, aside, nav li{transition: all 0.2s; -moz-transition: all 0.2s; -webkit-transition: all 0.2s; -o-transition: all 0.2s;}
+
+
+
