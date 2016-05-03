@@ -12,6 +12,7 @@ public class Usuario {
 	@GeneratedValue
 	private int id;
 	private String matricula;
+	private String senha;
 	private String nome;
 	private String email;
 	@OneToOne
@@ -34,6 +35,14 @@ public class Usuario {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNome() {

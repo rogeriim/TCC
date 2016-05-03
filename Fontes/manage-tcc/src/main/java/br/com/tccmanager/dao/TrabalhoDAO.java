@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.caelum.vraptor.ioc.Component;
 import br.com.tccmanager.model.Trabalho;
 import br.com.tccmanager.util.HibernateUtil;
 
+@Component
 @SuppressWarnings("unchecked")
 public class TrabalhoDAO {
 	
@@ -20,7 +22,7 @@ public class TrabalhoDAO {
 	
 	public void create(Trabalho trabalho) {
 		getSession().beginTransaction();
-		getSession().save(trabalho);
+		getSession().persist(trabalho);
 		getSession().getTransaction().commit();
 	}
 	
@@ -42,7 +44,11 @@ public class TrabalhoDAO {
 
 	public void update(Trabalho trabalho) {
 		Trabalho t = find(trabalho.getId());
+		
 		t.setTitulo(trabalho.getTitulo());
+		t.setDescricao(trabalho.getDescricao());
+		t.setTema(trabalho.getTema());
+		// TODO t.setOrientando(t.getOrientando());
 		
 		getSession().beginTransaction();
 		getSession().update(t);

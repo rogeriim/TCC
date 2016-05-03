@@ -6,26 +6,26 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Banca {
-	
+
 	@Id
 	@GeneratedValue
 	private int id;
 	private Date data;
 	private String status;
-	// TODO ver como mapear as chaves estrangeiras..
-	// @ManyToOne
-	// private List<Usuario> avaliador;
-	// @ManyToOne
-	// private Trabalho trabalho;
-	
+	@OneToOne
+	private Trabalho trabalho;
+	@OneToMany
+	private List<Usuario> usuario;
+
 	/*
 	 * Getters and Setters
 	 */
-	
+
 	public int getId() {
 		return id;
 	}
@@ -44,17 +44,17 @@ public class Banca {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	/* public List<Usuario> getAvaliador() {
-		return avaliador;
-	}
-	public void setAvaliador(List<Usuario> avaliador) {
-		this.avaliador = avaliador;
-	} 
 	public Trabalho getTrabalho() {
 		return trabalho;
 	}
 	public void setTrabalho(Trabalho trabalho) {
 		this.trabalho = trabalho;
-	} */
-	
+	}
+	public List<Usuario> getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(List<Usuario> usuario) {
+		this.usuario = usuario;
+	}
+
 }

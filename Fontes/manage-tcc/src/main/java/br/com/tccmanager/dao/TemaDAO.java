@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.tccmanager.model.Perfil;
+import br.com.tccmanager.model.Tema;
 import br.com.tccmanager.util.HibernateUtil;
 
 @SuppressWarnings("unchecked")
-public class PerfilDAO {
+public class TemaDAO {
 	
 	private Session session;
 
@@ -18,31 +18,31 @@ public class PerfilDAO {
 		return session;
 	}
 	
-	public void create(Perfil perfil) {
+	public void create(Tema tema) {
 		getSession().beginTransaction();
-		getSession().persist(perfil);
+		getSession().persist(tema);
 		getSession().getTransaction().commit();
 	}
 	
-	public List<Perfil> findAll() {
-		return getSession().createQuery("from Perfil").list();
+	public List<Tema> findAll() {
+		return getSession().createQuery("from Tema").list();
 	}
 	
-	public Perfil find(int id) {
-		return (Perfil) getSession().createQuery("from Perfil where id = " + id)
+	public Tema find(int id) {
+		return (Tema) getSession().createQuery("from Tema where id = " + id)
 				.uniqueResult();
 	}
 
 	public void remove(int id) {
-		Perfil perfil = find(id);
+		Tema tema = find(id);
 		getSession().beginTransaction();
-		getSession().delete(perfil);
+		getSession().delete(tema);
 		getSession().getTransaction().commit();	
 	}
 
-	public void update(Perfil perfil) {
-		Perfil p = find(perfil.getId());
-		p.setPerfil(perfil.getPerfil());
+	public void update(Tema tema) {
+		Tema p = find(tema.getId());
+		p.setTema(tema.getTema());
 		
 		getSession().beginTransaction();
 		getSession().update(p);

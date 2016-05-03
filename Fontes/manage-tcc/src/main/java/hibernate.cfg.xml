@@ -20,5 +20,6 @@
 		<mapping class="br.com.tccmanager.model.Tema" />
 		<mapping class="br.com.tccmanager.model.Trabalho" />
 		<mapping class="br.com.tccmanager.model.Usuario" />
+		
 	</session-factory>
 </hibernate-configuration>
