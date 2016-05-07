@@ -25,21 +25,6 @@
 
 				<hr />
 
-				<!--form action="adiciona">
-					<fieldset>
-						<legend>Adicionar Produto</legend>
-
-						<label for="nome">Nome:</label> <input id="nome" type="text"
-							name="produto.nome" /> <label for="descricao">Descrição:</label>
-						<textarea id="descricao" name="produto.descricao"></textarea>
-
-						<label for="preco">Preço:</label> <input id="preco" type="text"
-							name="produto.preco" />
-
-						<button type="submit">Enviar</button>
-					</fieldset>
-				</form-->
-
 				<form action="adiciona">
 					<div class="row">
 						<div class="form-group col-sm-12">
@@ -102,8 +87,9 @@
 				<div class="modal-body" style="padding: 40px 50px;">
 					<form role="form" action="adicionaTema">
 						<div class="form-group">
-							<label for="usrname">Tema</label> <input type="text"
-								class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
+							<label for="usrname">Tema</label> 
+							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
+							<input type="hidden" name="pagina" value="novo">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">
 							Adicionar</button>

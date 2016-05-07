@@ -38,10 +38,13 @@ public class TrabalhoController {
 		return temaDao.findAll();
 	}
 
-	public void adicionaTema(Tema tema) {
+	public void adicionaTema(Tema tema, String pagina, int trabalhoId) {
 		TemaDAO temaDao = new TemaDAO();
 		temaDao.create(tema);
-		result.redirectTo(this);
+
+		if (pagina.equalsIgnoreCase("editar"))
+			result.redirectTo(this).editar(trabalhoId);
+		else result.redirectTo(this).novo();
 	}
 
 	public void remove(int id) {
@@ -66,7 +69,7 @@ public class TrabalhoController {
 		trabalho.setTema(tema);
 		System.out.println("Descricao: " + trabalho.getDescricao());
 		// TODO implementar atualização de orientando também..
-		
+
 		dao.update(trabalho);
 		result.redirectTo(this).listar();
 	}

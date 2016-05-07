@@ -36,8 +36,8 @@
 											<option value="${tema.getId() }">${tema.getTema() }</option>
 										</c:forEach>
 										<option>Selecionar Tema</option>
-									</select> <a class="btn btn-primary" href="#" data-toggle="modal"
-										id="adicionarArea">Adicionar novo Tema</a>
+									</select> <a class="btn btn-primary" data-toggle="modal"
+										id="${estrutura.trabalho.getId() }" data-target="#insere-tema">Adicionar novo Tema</a>
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="novaArea" role="dialog">
+	<div class="modal fade" id="insere-tema" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -95,8 +95,10 @@
 				<div class="modal-body" style="padding: 40px 50px;">
 					<form role="form" action="adicionaTema">
 						<div class="form-group">
-							<label for="usrname">Tema</label> <input type="text"
-								class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
+							<label for="usrname">Tema</label> 
+							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
+							<input type="hidden" name="pagina" value="editar">
+							<input type="hidden" id="trabalhoId" name="trabalhoId" >
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">
 							Adicionar</button>
