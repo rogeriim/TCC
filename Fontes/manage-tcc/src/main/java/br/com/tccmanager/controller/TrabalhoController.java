@@ -41,7 +41,7 @@ public class TrabalhoController {
 	public void adicionaTema(Tema tema) {
 		TemaDAO temaDao = new TemaDAO();
 		temaDao.create(tema);
-		result.redirectTo(this).novo();
+		result.redirectTo(this);
 	}
 
 	public void remove(int id) {
