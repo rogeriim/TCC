@@ -1,7 +1,6 @@
 package br.com.tccmanager.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -9,8 +8,6 @@ import javax.persistence.OneToOne;
 public class Usuario {
 	
 	@Id
-	@GeneratedValue
-	private int id;
 	private String matricula;
 	private String senha;
 	private String nome;
@@ -21,14 +18,6 @@ public class Usuario {
 	/*
 	 * Getters and Setters
 	 */
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getMatricula() {
 		return matricula;
 	}

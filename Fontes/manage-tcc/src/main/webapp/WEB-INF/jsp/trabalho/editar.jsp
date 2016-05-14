@@ -17,15 +17,15 @@
 
 			<div class="container">
 				<h3 class="page-header">Editar trabalho</h3>
-				
-				<form action="altera">
+
+				<form action="altera" method="POST">
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<label for="titulo">Título</label>
-							<input class="form-control"
-								type="hidden" id="id" name="trabalho.id" value="${estrutura.trabalho.getId() }"> 
-							<input class="form-control"
-								id="titulo" name="trabalho.titulo" value="${estrutura.trabalho.getTitulo() }">
+							<label for="titulo">Título</label> <input class="form-control"
+								type="hidden" id="id" name="trabalho.id"
+								value="${estrutura.trabalho.getId() }"> <input
+								class="form-control" id="titulo" name="trabalho.titulo"
+								value="${estrutura.trabalho.getTitulo() }">
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="tema">Tema</label>
@@ -37,14 +37,15 @@
 										</c:forEach>
 										<option>Selecionar Tema</option>
 									</select> <a class="btn btn-primary" data-toggle="modal"
-										id="${estrutura.trabalho.getId() }" data-target="#insere-tema">Adicionar novo Tema</a>
+										id="${estrutura.trabalho.getId() }" data-target="#insere-tema">Adicionar
+										novo Tema</a>
 								</div>
 							</div>
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="descricao">Descrição</label>
-							<textarea class="form-control" rows="10" id="descricao" 
-							name="trabalho.descricao">${estrutura.trabalho.getDescricao() }</textarea>
+							<textarea class="form-control" rows="10" id="descricao"
+								name="trabalho.descricao">${estrutura.trabalho.getDescricao() }</textarea>
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="orientando">Orientando</label>
@@ -60,7 +61,7 @@
 							</div>
 						</div>
 					</div>
-	
+
 					<hr />
 
 					<div class="row">
@@ -93,12 +94,13 @@
 					<h4>Adicionar Tema</h4>
 				</div>
 				<div class="modal-body" style="padding: 40px 50px;">
-					<form role="form" action="adicionaTema">
+					<form role="form" action="adicionaTema" method="POST">
 						<div class="form-group">
-							<label for="usrname">Tema</label> 
-							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
-							<input type="hidden" name="pagina" value="editar">
-							<input type="hidden" id="trabalhoId" name="trabalhoId" >
+							<label for="usrname">Tema</label> <input type="text"
+								class="form-control" id="area" name="tema.tema"
+								placeholder="Novo Tema"> <input type="hidden"
+								name="pagina" value="editar"> <input type="hidden"
+								id="trabalhoId" name="trabalhoId">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">
 							Adicionar</button>
@@ -107,10 +109,10 @@
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-danger btn-default"
 						data-dismiss="modal">Cancelar</button>
-					<a href="<c:url value="/trabalho/novo"/>"  class="btn btn-link">Voltar</a>
+					<a href="<c:url value="/trabalho/novo"/>" class="btn btn-link">Voltar</a>
 				</div>
 			</div>
-		 </div>
+		</div>
 	</div>
 	<!-- END modal -->
 

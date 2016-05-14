@@ -25,7 +25,7 @@
 
 				<hr />
 
-				<form action="adiciona">
+				<form action="adiciona" method="POST">
 					<div class="row">
 						<div class="form-group col-sm-12">
 							<label for="titulo">Titulo</label> <input class="form-control"
@@ -85,7 +85,7 @@
 					<h4>Adicionar Tema</h4>
 				</div>
 				<div class="modal-body" style="padding: 40px 50px;">
-					<form role="form" action="adicionaTema">
+					<form role="form" action="adicionaTema" method="POST">
 						<div class="form-group">
 							<label for="usrname">Tema</label> 
 							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
