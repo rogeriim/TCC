@@ -14,7 +14,6 @@
 		<property name="hibernate.format_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
 		
-		<mapping class="br.com.tccmanager.model.Banca" />
 		<mapping class="br.com.tccmanager.model.Monografia" />
 		<mapping class="br.com.tccmanager.model.Perfil" />
 		<mapping class="br.com.tccmanager.model.Tema" />

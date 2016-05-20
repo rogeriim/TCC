@@ -12,6 +12,7 @@ public class Usuario {
 	private String senha;
 	private String nome;
 	private String email;
+	private boolean primeiroAcesso;
 	@OneToOne
 	private Perfil perfil;
 	
@@ -48,6 +49,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isPrimeiroAcesso() {
+		return primeiroAcesso;
+	}
+
+	public void setPrimeiroAcesso(boolean primeiroAcesso) {
+		this.primeiroAcesso = primeiroAcesso;
 	}
 
 	public Perfil getPerfil() {

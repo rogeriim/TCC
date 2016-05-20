@@ -51,18 +51,15 @@
 
 					<div class="col-sm-4"></div>
 
-					<form class="col-sm-4" action="login" method="POST">
+					<form class="col-sm-4" action="alteraSenha" method="POST">
 						<div class="row">
 							<fieldset class="col-sm-12">
-								<legend class="text-center h2">Login </legend>
+								<legend class="text-center h2">Alterar Senha </legend>
 
-								<div class="form-group">
-									<label for="matricula">Matricula</label> <input type="text"
+								<input type="hidden"
 										class="form-control" id="matricula" name="usuario.matricula">
-								</div>
-
 								<div class="form-group">
-									<label for="senha">Senha</label> <input type="password"
+									<label for="matricula">Nova senha</label> <input type="password"
 										class="form-control" id="senha" name="usuario.senha">
 								</div>
 
@@ -70,7 +67,7 @@
 						</div>
 
 						<button type="submit" class="btn btn-primary pull-right">
-							Entrar</button>
+							Alterar</button>
 					</form>
 				</div>
 

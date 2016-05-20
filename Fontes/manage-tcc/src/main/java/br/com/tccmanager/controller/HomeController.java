@@ -11,12 +11,12 @@ import br.com.tccmanager.model.Usuario;
 
 @Resource
 public class HomeController {
-	
+
 	private UsuarioDAO usuarioDao;
 	private Result result;
 	private Validator validator;
 	private UsuarioWeb usuarioWeb;
-	
+
 	public HomeController(UsuarioDAO usuarioDao, Result result,
 			Validator validator, UsuarioWeb usuarioWeb) {
 		this.usuarioDao = usuarioDao;
@@ -24,10 +24,10 @@ public class HomeController {
 		this.validator = validator;
 		this.usuarioWeb = usuarioWeb;
 	}
-	
+
 	public void loginForm() {
 	}
-	
+
 	public void login(Usuario usuario) {
 		Usuario carregado = usuarioDao.carrega(usuario);
 		if (carregado == null) {
@@ -36,9 +36,28 @@ public class HomeController {
 		}
 		validator.onErrorUsePageOf(HomeController.class).loginForm();
 		usuarioWeb.login(carregado);
+		if(carregado.isPrimeiroAcesso())
+			result.redirectTo(this).primeiroLogin(carregado);
+		else result.redirectTo(TrabalhoController.class).listar();
+	}
+
+	public Usuario primeiroLogin(Usuario usuario) {
+		return usuario;
+	}
+
+	public void alteraSenha(String matricula, String senha, String senhaConfirmada) {
+		if (!senha.equals(senhaConfirmada)) {
+			validator.add(new ValidationMessage("Senhas digitadas não são iguais", null));
+		}
+
+		Usuario usuario = usuarioDao.find(matricula);
+		validator.onErrorUsePageOf(HomeController.class).primeiroLogin(usuario);
+
+		usuarioDao.alteraSenha(matricula, senhaConfirmada);
+
 		result.redirectTo(TrabalhoController.class).listar();
 	}
-	
+
 	@Path("/logout")
 	public void logout() {
 		usuarioWeb.logout();
