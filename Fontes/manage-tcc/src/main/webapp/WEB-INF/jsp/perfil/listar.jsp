@@ -30,7 +30,7 @@
 								<th><strong>Perfil</strong></th>
 								<th class="actions">
 								<a class="btn btn-primary" href="#" data-toggle="modal"
-										id="adicionarPerfil">Adicionar novo Perfil</a></th>
+										id="adicionarPerfil">Adicionar novo</a></th>
 							</tr>
 						</thead>
 						<tbody>

@@ -19,7 +19,7 @@
 
 				<div id="top" class="row">
 					<div class="col-sm-6" align="center">
-						<h2>Adicionar Usuário</h2>
+						<h2>Adicionar Banca</h2>
 					</div>
 				</div>
 
@@ -28,27 +28,45 @@
 				<form action="adiciona" method="POST">
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<label for="matricula">Matrícula</label> <input class="form-control"
-								id="matricula" name="usuario.matricula">
+							<label for="resumo">Data Defesa</label> <input class="form-control"
+								id="resumo" name="monografia.resumo">
 						</div>
 						<div class="form-group col-sm-12">
-							<label for="email">E-mail</label> <input class="form-control"
-								id="email" name="usuario.email">
-						</div>
-						<div class="form-group col-sm-12">
-							<label for="nome">Nome</label> <input class="form-control"
-								id="nome" name="usuario.nome">
-						</div>
-						<div class="form-group col-sm-12">
-							<label for="perfil">Perfil</label>
+							<label for="trabalho">Trabalho</label>
 							<div class="row">
 								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="perfil.id">
-										<c:forEach items="${perfilList}" var="perfil">
-											<option value="${perfil.getId() }"> ${perfil.getPerfil() }</option>
+									<select class="btn btn-default" name="trabalho.id">
+										<c:forEach items="${estruturaBanca.trabalho}" var="trabalho">
+											<option value="${trabalho.getId() }">${trabalho.getTitulo() }</option>
 										</c:forEach>
-										<option>Selecionar Perfil</option>
-									</select>
+										<option>Selecionar Trabalho</option>
+									</select> 
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-sm-12">
+							<label for="trabalho">Avaliador 1</label>
+							<div class="row">
+								<div class="col-md-12 form-actions">
+									<select class="btn btn-default" name="avaliador1.matricula">
+										<c:forEach items="${estruturaBanca.avaliador1}" var="avaliador1">
+											<option value="${avaliador1.getMatricula() }">${avaliador1.getNome() }</option>
+										</c:forEach>
+										<option>Selecionar Avaliador 1</option>
+									</select> 
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-sm-12">
+							<label for="trabalho">Avaliador 2</label>
+							<div class="row">
+								<div class="col-md-12 form-actions">
+									<select class="btn btn-default" name="avaliador2.matricula">
+										<c:forEach items="${estruturaBanca.avaliador2}" var="avaliador2">
+											<option value="${avaliador2.getMatricula() }">${avaliador2.getNome() }</option>
+										</c:forEach>
+										<option>Selecionar Avaliador 2</option>
+									</select> 
 								</div>
 							</div>
 						</div>

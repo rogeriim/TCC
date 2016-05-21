@@ -34,6 +34,8 @@
 						</c:if>
 						<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
 						<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
+						<li><a href="<c:url value="/monografia/listar"/>" title="Monografias">Monografias</a></li>
+						<li><a href="<c:url value="/banca/listar"/>" title="Monografias">Bancas</a></li>
 					</ul>
 				</div>
 			</div>

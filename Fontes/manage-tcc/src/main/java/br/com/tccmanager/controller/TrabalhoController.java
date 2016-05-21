@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.tccmanager.auth.Restrito;
 import br.com.tccmanager.dao.TemaDAO;
 import br.com.tccmanager.dao.TrabalhoDAO;
-import br.com.tccmanager.model.Estrutura;
+import br.com.tccmanager.model.EstruturaTrabalho;
 import br.com.tccmanager.model.Tema;
 import br.com.tccmanager.model.Trabalho;
 
@@ -59,9 +59,9 @@ public class TrabalhoController {
 	}
 
 	@Restrito
-	public Estrutura editar(int id) {
-		Estrutura estrutura = new Estrutura();
-		estrutura.setId(10);
+	public EstruturaTrabalho editar(int id) {
+		EstruturaTrabalho estrutura = new EstruturaTrabalho();
+		estrutura.setId(id);
 		estrutura.setTrabalho(dao.find(id));
 
 		TemaDAO temaDao = new TemaDAO();

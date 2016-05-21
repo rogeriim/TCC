@@ -19,7 +19,7 @@
 
 				<div id="top" class="row">
 					<div class="col-sm-6" align="center">
-						<h2>Adicionar Usuário</h2>
+						<h2>Adicionar Monografia</h2>
 					</div>
 				</div>
 
@@ -28,26 +28,18 @@
 				<form action="adiciona" method="POST">
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<label for="matricula">Matrícula</label> <input class="form-control"
-								id="matricula" name="usuario.matricula">
+							<label for="resumo">Resumo</label> <input class="form-control"
+								id="resumo" name="monografia.resumo">
 						</div>
 						<div class="form-group col-sm-12">
-							<label for="email">E-mail</label> <input class="form-control"
-								id="email" name="usuario.email">
-						</div>
-						<div class="form-group col-sm-12">
-							<label for="nome">Nome</label> <input class="form-control"
-								id="nome" name="usuario.nome">
-						</div>
-						<div class="form-group col-sm-12">
-							<label for="perfil">Perfil</label>
+							<label for="trabalho">Trabalho Relacionado</label>
 							<div class="row">
 								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="perfil.id">
-										<c:forEach items="${perfilList}" var="perfil">
-											<option value="${perfil.getId() }"> ${perfil.getPerfil() }</option>
+									<select class="btn btn-default" name="trabalho.id">
+										<c:forEach items="${trabalhoList}" var="trabalho">
+											<option value="${trabalho.getId() }"> ${trabalho.getTitulo() }</option>
 										</c:forEach>
-										<option>Selecionar Perfil</option>
+										<option>Selecionar Trabalho Relacionado</option>
 									</select>
 								</div>
 							</div>

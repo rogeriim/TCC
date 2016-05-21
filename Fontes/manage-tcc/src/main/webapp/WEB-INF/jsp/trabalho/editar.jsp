@@ -23,21 +23,21 @@
 						<div class="form-group col-sm-12">
 							<label for="titulo">Título</label> <input class="form-control"
 								type="hidden" id="id" name="trabalho.id"
-								value="${estrutura.trabalho.getId() }"> <input
+								value="${estruturaTrabalho.trabalho.getId() }"> <input
 								class="form-control" id="titulo" name="trabalho.titulo"
-								value="${estrutura.trabalho.getTitulo() }">
+								value="${estruturaTrabalho.trabalho.getTitulo() }">
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="tema">Tema</label>
 							<div class="row">
 								<div class="col-md-12 form-actions">
 									<select class="btn btn-default" name="tema.id">
-										<c:forEach items="${estrutura.tema}" var="tema">
+										<c:forEach items="${estruturaTrabalho.tema}" var="tema">
 											<option value="${tema.getId() }">${tema.getTema() }</option>
 										</c:forEach>
 										<option>Selecionar Tema</option>
 									</select> <a class="btn btn-primary" data-toggle="modal"
-										id="${estrutura.trabalho.getId() }" data-target="#insere-tema">Adicionar
+										id="${estruturaTrabalho.trabalho.getId() }" data-target="#insere-tema">Adicionar
 										novo Tema</a>
 								</div>
 							</div>
@@ -45,14 +45,14 @@
 						<div class="form-group col-sm-12">
 							<label for="descricao">Descrição</label>
 							<textarea class="form-control" rows="10" id="descricao"
-								name="trabalho.descricao">${estrutura.trabalho.getDescricao() }</textarea>
+								name="trabalho.descricao">${estruturaTrabalho.trabalho.getDescricao() }</textarea>
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="orientando">Orientando</label>
 							<div class="row">
 								<div class="col-md-12 form-actions">
 									<select class="btn btn-default" name="usuario.id">
-										<c:forEach items="${estrutura.usuario}" var="usuario">
+										<c:forEach items="${estruturaTrabalho.usuario}" var="usuario">
 											<option value="${usuario.getId() }">${usuario.getNome() }</option>
 										</c:forEach>
 										<option>Selecionar Orientando</option>

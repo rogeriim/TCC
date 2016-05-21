@@ -31,8 +31,7 @@
 							<th><strong>Id</strong></th>
 							<th><strong>Tema</strong></th>
 							<th class="actions"><a class="btn btn-primary" href="#"
-								data-toggle="modal" id="adicionarTema">Adicionar novo
-									Tema</a></th>
+								data-toggle="modal" id="adicionarTema">Adicionar novo</a></th>
 						</tr>
 					</thead>
 					<tbody>

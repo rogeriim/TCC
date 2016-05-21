@@ -1,12 +1,11 @@
 package br.com.tccmanager.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,8 +18,10 @@ public class Banca {
 	private String status;
 	@OneToOne
 	private Trabalho trabalho;
-	@OneToMany
-	private List<Usuario> usuario;
+	@ManyToOne
+	private Usuario avaliador1;
+	@ManyToOne
+	private Usuario avaliador2;
 
 	/*
 	 * Getters and Setters
@@ -50,11 +51,17 @@ public class Banca {
 	public void setTrabalho(Trabalho trabalho) {
 		this.trabalho = trabalho;
 	}
-	public List<Usuario> getUsuario() {
-		return usuario;
+	public Usuario getAvaliador1() {
+		return avaliador1;
 	}
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setAvaliador1(Usuario avaliador1) {
+		this.avaliador1 = avaliador1;
+	}
+	public Usuario getAvaliador2() {
+		return avaliador2;
+	}
+	public void setAvaliador2(Usuario avaliador2) {
+		this.avaliador2 = avaliador2;
 	}
 
 }

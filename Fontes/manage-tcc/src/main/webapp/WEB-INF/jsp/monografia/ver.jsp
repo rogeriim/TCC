@@ -17,12 +17,12 @@
 			
 				<div class="container" >
 					
-					<h3 class="page-header">Banca ${banca.getId() }</h3>
+					<h3 class="page-header">${monografia.getTrabalho().getTitulo() }</h3>
   
 					<div class="row">
 						<div class="col-sm-12">
-							<label><strong>Data</strong></label>
-							<p>${banca.getData() }</p>
+							<label><strong>Resumo</strong></label>
+							<p>${monografia.getResumo() }</p>
 						</div>
 						
 						<div class="row">
@@ -32,8 +32,8 @@
 						</div>
 						
 						<div class="col-sm-12">
-							<label><strong>Trabalho</strong></label>
-							<p>${banca.getTrabalho().getTitulo() }</p>
+							<label><strong>Desenvolvido por</strong></label>
+							<p>${monografia.getTrabalho().getOrientando() }</p>
 						</div>
 						
 						<div class="row">
@@ -43,41 +43,8 @@
 						</div>
 						
 						<div class="col-sm-12">
-							<label><strong>Orientando</strong></label>
-							<p>${banca.getTrabalho().getOrientando().getNome() }</p>
-						</div>
-						
-						<div class="row">
-							<div class="col-sm-12 breakline">
-								<br>
-							</div>
-						</div>
-						
-						<div class="col-sm-12">
-							<label><strong>Avaliador 1</strong></label>
-							<p>${banca.getAvaliador1().getNome() }</p>
-						</div>
-						
-						<div class="row">
-							<div class="col-sm-12 breakline">
-								<br>
-							</div>
-						</div>
-						
-						<div class="col-sm-12">
-							<label><strong>Avaliador 2</strong></label>
-							<p>${banca.getAvaliador2().getNome() }</p>
-						</div>
-						
-						<div class="row">
-							<div class="col-sm-12 breakline">
-								<br>
-							</div>
-						</div>
-						
-						<div class="col-sm-12">
-							<label><strong>Status</strong></label>
-							<p>${banca.getStatus() }</p>
+							<label><strong>Orientado por</strong></label>
+							<p>${monografia.getTrabalho().getOrientador() }</p>
 						</div>
 						
 						<div class="row">

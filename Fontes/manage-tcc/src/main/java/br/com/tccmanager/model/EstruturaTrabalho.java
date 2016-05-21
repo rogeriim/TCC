@@ -2,12 +2,13 @@ package br.com.tccmanager.model;
 
 import java.util.List;
 
-public class Estrutura {
+public class EstruturaTrabalho {
 	
 	private int id;
 	private Trabalho trabalho;
 	private List<Usuario> usuario;
 	private List<Tema> tema;
+	
 	public int getId() {
 		return id;
 	}
