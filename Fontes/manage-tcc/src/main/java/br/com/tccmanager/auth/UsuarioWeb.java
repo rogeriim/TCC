@@ -17,7 +17,7 @@ public class UsuarioWeb {
 	public String getNome() {
 		return logado.getNome();
 	}
-	
+
 	public String getPerfil() {
 		return logado.getPerfil().getPerfil();
 	}
@@ -25,7 +25,15 @@ public class UsuarioWeb {
 	public boolean isLogado() {
 		return logado != null;
 	}
-	
+
+	public boolean isPrimeiroAcesso() {
+		return logado.isPrimeiroAcesso();
+	}
+
+	public boolean isAdministrador() {
+		return logado.getPerfil().getPerfil().equalsIgnoreCase("ADMINISTRADOR");
+	}
+
 	public void logout() {
 		logado = null;
 	}

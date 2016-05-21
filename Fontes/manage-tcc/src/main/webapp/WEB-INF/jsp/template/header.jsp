@@ -11,8 +11,8 @@
 				title="Gerenciador de TCC | FACOM" /></a>
 		</h1>
 	</div>
-	
-	<c:if test="${usuarioWeb.logado}">
+
+	<c:if test="${(usuarioWeb.logado and !usuarioWeb.primeiroAcesso)}">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="pageWidth">
 				<div class="navbar-header">
@@ -25,8 +25,15 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bar1">
 					<ul class="nav navbar-nav">
-						<li><a href="listar" title="Trabalhos">Trabalhos</a></li>
-						<li><a href="bancas.html" title="Bancas">Bancas</a></li>
+						<li><a href="<c:url value="/trabalho/listar"/>"
+							title="Trabalhos">Trabalhos</a></li>
+						<li><a href="<c:url value="/usuario/listar"/>"
+							title="Usuários">Usuários</a></li>
+						<c:if test="${usuarioWeb.administrador }">
+						<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
+						</c:if>
+						<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
+						<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
 					</ul>
 				</div>
 			</div>

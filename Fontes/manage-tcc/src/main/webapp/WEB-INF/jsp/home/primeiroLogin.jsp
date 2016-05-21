@@ -57,12 +57,16 @@
 								<legend class="text-center h2">Alterar Senha </legend>
 
 								<input type="hidden"
-										class="form-control" id="matricula" name="usuario.matricula">
+										class="form-control" id="matricula" name="matricula" value="${usuario.getMatricula() }">
 								<div class="form-group">
 									<label for="matricula">Nova senha</label> <input type="password"
-										class="form-control" id="senha" name="usuario.senha">
+										class="form-control" id="senha" name="senha">
 								</div>
-
+								<div class="form-group">
+									<label for="matricula">Confirmar nova senha</label> <input type="password"
+										class="form-control" id="senhaConfirmada" name="senhaConfirmada">
+								</div>
+								
 							</fieldset>
 						</div>
 

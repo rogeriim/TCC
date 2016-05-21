@@ -97,7 +97,7 @@
 					<form role="form" action="adicionaTema" method="POST">
 						<div class="form-group">
 							<label for="usrname">Tema</label> <input type="text"
-								class="form-control" id="area" name="tema.tema"
+								class="form-control" id="tema" name="tema.tema"
 								placeholder="Novo Tema"> <input type="hidden"
 								name="pagina" value="editar"> <input type="hidden"
 								id="trabalhoId" name="trabalhoId">

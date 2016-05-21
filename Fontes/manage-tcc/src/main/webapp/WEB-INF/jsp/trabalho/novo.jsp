@@ -41,7 +41,7 @@
 										</c:forEach>
 										<option>Selecionar Tema</option>
 									</select> <a class="btn btn-primary" href="#" data-toggle="modal"
-										id="adicionarArea">Adicionar novo Tema</a>
+										id="adicionarTema">Adicionar novo Tema</a>
 								</div>
 							</div>
 						</div>
@@ -75,7 +75,7 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="novaArea" role="dialog">
+	<div class="modal fade" id="novoTema" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -87,8 +87,8 @@
 				<div class="modal-body" style="padding: 40px 50px;">
 					<form role="form" action="adicionaTema" method="POST">
 						<div class="form-group">
-							<label for="usrname">Tema</label> 
-							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
+							<label for="tema">Tema</label> 
+							<input type="text" class="form-control" id="tema" name="tema.tema" placeholder="Novo Tema">
 							<input type="hidden" name="pagina" value="novo">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">

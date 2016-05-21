@@ -35,7 +35,7 @@ public class CriptografiaUtil {
 	}
 	
 	public static void main(String[] args){
-		String senha = "senhadeteste";
+		String senha = "123";
 		System.out.println(CriptografiaUtil.criptografar(senha));
 	}
 

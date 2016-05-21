@@ -1,5 +1,7 @@
 package br.com.tccmanager.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -7,6 +9,7 @@ import br.com.tccmanager.model.Usuario;
 import br.com.tccmanager.util.CriptografiaUtil;
 import br.com.tccmanager.util.HibernateUtil;
 
+@SuppressWarnings("unchecked")
 public class UsuarioDAO {
 
 	private Session session;
@@ -24,9 +27,9 @@ public class UsuarioDAO {
 				.uniqueResult();
 	}
 
-	// TODO criptografar a senha antes de gravar no banco.
 	public void create(Usuario usuario) {
 		getSession().beginTransaction();
+		usuario.setPrimeiroAcesso(true);
 		getSession().persist(usuario);
 		getSession().getTransaction().commit();
 	}
@@ -36,15 +39,37 @@ public class UsuarioDAO {
 				.add(Restrictions.eq("matricula", matricula))
 				.uniqueResult();
 	}
-	
+
 	public void alteraSenha(String matricula, String novaSenha) {
 		Usuario usuario = find(matricula);
-		usuario.setSenha(novaSenha);
-		
+		usuario.setSenha(CriptografiaUtil.criptografar(novaSenha));
+		usuario.setPrimeiroAcesso(false);
+
 		getSession().beginTransaction();
 		getSession().update(usuario);
 		getSession().getTransaction().commit();	
 	}
 
+	public List<Usuario> findAll() {
+		return getSession().createQuery("from Usuario").list();
+	}
+	
+	public void remove(String matricula) {
+		Usuario usuario = find(matricula);
+		getSession().beginTransaction();
+		getSession().delete(usuario);
+		getSession().getTransaction().commit();	
+	}
 
+	public void update(Usuario usuario) {
+		Usuario user = find(usuario.getMatricula());
+		
+		user.setEmail(usuario.getEmail());
+		user.setNome(usuario.getNome());
+
+		getSession().beginTransaction();
+		getSession().update(user);
+		getSession().getTransaction().commit();	
+	}
+	
 }

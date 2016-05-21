@@ -17,7 +17,7 @@
 	
 					<div id="top" class="row">
 						<div class="col-sm-6" align="center">
-							<h2>Trabalhos</h2>
+							<h2>Usuários</h2>
 						</div>
 					</div>
 	
@@ -26,24 +26,24 @@
 					<table id="bootstrap-table" class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th><strong>Título</strong></th>
-								<th><strong>Data</strong></th>
-								<th><strong>Tema</strong></th>
+								<th><strong>Matrícula</strong></th>
+								<th><strong>E-mail</strong></th>
+								<th><strong>Nome</strong></th>
 								<th class="actions"><a
-									href="<c:url value="/trabalho/novo"/>"
+									href="<c:url value="/usuario/novo"/>"
 									class="btn btn-primary h2">Adicionar novo</a></th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${trabalhoList}" var="trabalho">
+							<c:forEach items="${usuarioList}" var="usuario">
 								<tr>
-									<td>${trabalho.getTitulo() }</td>
-									<td>${trabalho.getData() }</td>
-									<td>${trabalho.getTema().getTema() }</td>
+									<td>${usuario.getMatricula() }</td>
+									<td>${usuario.getEmail() }</td>
+									<td>${usuario.getNome() }</td>
 									<td class="actions">
-										<a class="btn btn-primary btn-xs" href="ver?id=${trabalho.getId()}">Visualizar</a> 
-										<a class="btn btn-primary btn-xs" href="editar?id=${trabalho.getId()}">Editar</a> 
-										<a class="btn btn-danger btn-xs" data-toggle="modal" id="${trabalho.getId()}" data-target="#delete-modal">Excluir</a>
+										<a class="btn btn-primary btn-xs" href="ver?matricula=${usuario.getMatricula()}">Visualizar</a> 
+										<a class="btn btn-primary btn-xs" href="editar?matricula=${usuario.getMatricula()}">Editar</a> 
+										<a class="btn btn-danger btn-xs" data-toggle="modal" id="${usuario.getMatricula()}" data-target="#delete-modal">Excluir</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -64,9 +64,9 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Excluir Trabalho</h4>
+							<h4 class="modal-title" id="myModalLabel">Excluir Usuário</h4>
 						</div>
-						<div class="modal-body">Deseja realmente excluir este trabalho?</div>
+						<div class="modal-body">Deseja realmente excluir este usuário?</div>
 						<div class="modal-footer">
 							<a type="submit" class="btn btn-primary" id="deletar">Sim</a>
 							<a type="button" class="btn btn-default" data-dismiss="modal">Não</a>

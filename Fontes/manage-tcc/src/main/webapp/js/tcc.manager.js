@@ -29,7 +29,13 @@ $(document).ready(function() {
 })
 
 $(document).ready(function() {
-	$("#adicionarArea").click(function(){
-		$("#novaArea").modal();
+	$("#adicionarTema").click(function(){
+		$("#novoTema").modal();
+	});
+});
+
+$(document).ready(function() {
+	$("#adicionarPerfil").click(function(){
+		$("#novoPerfil").modal();
 	});
 });
