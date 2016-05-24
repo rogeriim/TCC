@@ -13,6 +13,10 @@ public class UsuarioWeb {
 	public void login(Usuario usuario) {
 		this.logado = usuario;
 	}
+	
+	public String getMatricula() {
+		return logado.getMatricula();
+	}
 
 	public String getNome() {
 		return logado.getNome();
@@ -32,6 +36,14 @@ public class UsuarioWeb {
 
 	public boolean isAdministrador() {
 		return logado.getPerfil().getPerfil().equalsIgnoreCase("ADMINISTRADOR");
+	}
+	
+	public boolean isAluno() {
+		return logado.getPerfil().getPerfil().equalsIgnoreCase("ALUNO");
+	}
+	
+	public boolean isProfessor() {
+		return logado.getPerfil().getPerfil().equalsIgnoreCase("PROFESSOR");
 	}
 
 	public void logout() {

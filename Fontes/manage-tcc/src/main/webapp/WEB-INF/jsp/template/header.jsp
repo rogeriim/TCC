@@ -25,17 +25,19 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bar1">
 					<ul class="nav navbar-nav">
-						<li><a href="<c:url value="/trabalho/listar"/>"
-							title="Trabalhos">Trabalhos</a></li>
-						<li><a href="<c:url value="/usuario/listar"/>"
-							title="Usuários">Usuários</a></li>
-						<c:if test="${usuarioWeb.administrador }">
-						<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
-						</c:if>
-						<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
-						<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
+						<li><a href="<c:url value="/trabalho/listar"/>" title="Trabalhos">Trabalhos</a></li>
 						<li><a href="<c:url value="/monografia/listar"/>" title="Monografias">Monografias</a></li>
-						<li><a href="<c:url value="/banca/listar"/>" title="Monografias">Bancas</a></li>
+						<c:if test="${usuarioWeb.aluno }">
+							<li><a href="<c:url value="/candidato/listar"/>" title="Candidaturas">Minhas opções</a></li>
+						</c:if>
+						<c:if test="${usuarioWeb.administrador }">
+							<li><a href="<c:url value="/usuario/listar"/>" title="Usuários">Usuários</a></li>
+							<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
+							<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
+						</c:if>
+						<c:if test="${usuarioWeb.professor || usuarioWeb.administrador }">
+							<li><a href="<c:url value="/banca/listar"/>" title="Bancas">Bancas</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>
