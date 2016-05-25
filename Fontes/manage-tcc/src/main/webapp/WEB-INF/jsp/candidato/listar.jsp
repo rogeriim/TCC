@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/jsp/template/head.jsp" />
 
@@ -30,13 +31,12 @@
 						trabalhos disponíveis.</p>
 					<div class="col-sm-7">
 						<div class="btn-group pull-right">
-							<a href="<c:url value="/candidato/criar"/>"
+							<a href="<c:url value="/candidato/criar?matricula=${usuarioWeb.getMatricula() }"/>"
 								class="btn btn-primary h2 ">Adicionar novo</a>
 						</div>
 					</div>
 						
 				</c:if>
-
 
 				<c:if test="${not empty candidatoList }">
 				<table id="bootstrap-table" class="table table-striped table-hover">
@@ -45,9 +45,12 @@
 							<th><strong>Título trabalho</strong></th>
 							<th><strong>Prioridade</strong></th>
 							<th><strong>Orientador</strong></th>
-							<th class="actions"><a
-								href="<c:url value="/candidato/criar"/>"
-								class="btn btn-primary h2">Adicionar novo</a></th>
+							<th class="actions">
+								<c:if test="${fn:length(candidatoList) lt 3}" >
+									<a href="<c:url value="/candidato/criar?matricula=${usuarioWeb.getMatricula() }"/>"
+										class="btn btn-primary h2">Adicionar novo</a>
+								</c:if>
+							</th>
 						</tr>
 					</thead>
 					<tbody>

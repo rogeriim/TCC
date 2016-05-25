@@ -24,48 +24,43 @@
 				</div>
 
 				<hr />
+				
+				<c:if test="${empty trabalhoList }">
+					<p align="center">Por enquanto, não existem trabalhos disponíveis para se candidatar.</p>
+				</c:if>
 
-				<form action="adiciona" method="POST">
-					<div class="row">
-						<input class="form-control" type="hidden" id="matricula" name="matricula"
-								value="${usuarioWeb.getMatricula() }">
-						<div class="form-group col-sm-12">
-							<label for="tema">Trabalho</label>
-							<div class="row">
-								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="trabalho.id">
-										<c:forEach items="${trabalhoList}" var="trabalho">
-											<option value="${trabalho.getId() }"> ${trabalho.getTitulo() }</option>
-										</c:forEach>
-									</select> 
+				<c:if test="${not empty trabalhoList }">
+					<form action="adiciona" method="POST">
+						<div class="row">
+							<input class="form-control" type="hidden" id="matricula"
+								name="matricula" value="${usuarioWeb.getMatricula() }">
+							<div class="form-group col-sm-12">
+								<label for="tema">Trabalho</label>
+								<div class="row">
+									<div class="col-md-12 form-actions">
+										<select class="btn btn-default" name="trabalho.id">
+											<c:forEach items="${trabalhoList}" var="trabalho">
+												<option value="${trabalho.getId() }">
+													${trabalho.getTitulo() }</option>
+											</c:forEach>
+										</select>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-sm-12">
-							<label for="tema">Ordem de Prioridade</label>
-							<div class="row">
-								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="prioridade">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select> 
-								</div>
+
+						<hr />
+
+						<div class="row">
+							<div class="col-md-12 form-actions">
+								<button type="submit" class="btn btn-primary">Adicionar</button>
+								<button type="reset" class="btn btn-default">Limpar</button>
+								<a href="trabalhos.html" class="btn btn-link">Voltar</a>
 							</div>
 						</div>
-					</div>
 
-					<hr />
-
-					<div class="row">
-						<div class="col-md-12 form-actions">
-							<button type="submit" class="btn btn-primary">Adicionar</button>
-							<button type="reset" class="btn btn-default">Limpar</button>
-							<a href="trabalhos.html" class="btn btn-link">Voltar</a>
-						</div>
-					</div>
-
-				</form>
+					</form>
+				</c:if>
 
 			</div>
 			<!-- /#container -->

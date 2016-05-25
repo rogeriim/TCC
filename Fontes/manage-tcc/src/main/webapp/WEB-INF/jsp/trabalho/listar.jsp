@@ -55,7 +55,7 @@
 									<td>${trabalho.getOrientador().getNome }</td>
 								</c:if>
 								<td class="actions"><a class="btn btn-primary btn-xs"
-									href="ver?id=${trabalho.getId()}">Visualizar</a> 
+									href="ver?id=${trabalho.getId()}&matricula=${usuarioWeb.getMatricula() }">Visualizar</a> 
 									<c:if test="${usuarioWeb.professor || usuarioWeb.administrador }">
 										<a class="btn btn-primary btn-xs"
 											href="editar?id=${trabalho.getId()}">Editar</a>

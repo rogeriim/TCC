@@ -1,13 +1,16 @@
 package br.com.tccmanager.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.tccmanager.auth.Restrito;
+import br.com.tccmanager.dao.CandidatoDAO;
 import br.com.tccmanager.dao.TemaDAO;
 import br.com.tccmanager.dao.TrabalhoDAO;
+import br.com.tccmanager.model.Candidato;
 import br.com.tccmanager.model.EstruturaTrabalho;
 import br.com.tccmanager.model.Tema;
 import br.com.tccmanager.model.Trabalho;
@@ -83,8 +86,22 @@ public class TrabalhoController {
 	}
 
 	@Restrito
-	public Trabalho ver(int id) {
-		return dao.find(id);
+	public EstruturaTrabalho ver(int id, String matricula) {
+		EstruturaTrabalho estrutura = new EstruturaTrabalho();
+
+		estrutura.setTrabalho(dao.find(id));
+
+		// verifica se o aluno logado já é candidato àquele trabalho..
+		List<Candidato> candidatoList = new ArrayList<Candidato>();
+		CandidatoDAO candidatoDao = new CandidatoDAO();
+		Candidato candidato = candidatoDao.findByTrabalhoAndMatricula(id, matricula);
+
+		if (candidato != null) {
+			candidatoList.add(candidatoDao.findByTrabalhoAndMatricula(id, matricula));
+			estrutura.setCandidato(candidatoList);
+		}
+
+		return estrutura;
 	}
 
 }

@@ -9,7 +9,7 @@ import br.com.tccmanager.util.HibernateUtil;
 
 @SuppressWarnings("unchecked")
 public class CandidatoDAO {
-	
+
 	private Session session;
 
 	private Session getSession() {
@@ -17,24 +17,38 @@ public class CandidatoDAO {
 				getSessionFactory().openSession();
 		return session;
 	}
-	
+
 	public void create(Candidato candidato) {
 		getSession().beginTransaction();
 		getSession().persist(candidato);
 		getSession().getTransaction().commit();
 	}
-	
+
 	public List<Candidato> findAll() {
 		return getSession().createQuery("from Candidato").list();
 	}
-	
+
 	public List<Candidato> findAllByUser(String matricula) {
 		return getSession().createQuery("from Candidato where aluno = " + matricula).list();
 	}
-	
+
+	public Candidato findByTrabalhoAndMatricula(int id, String matricula) {
+		return (Candidato) getSession().createQuery("from Candidato where aluno = " + matricula
+				+ " and trabalho = " + id).uniqueResult();
+	}
+
+	public List<Candidato> findByTrabalho(int id) {
+		return getSession().createQuery("from Candidato where trabalho = " + id).list();
+	}
+
 	public Candidato find(int id) {
 		return (Candidato) getSession().createQuery("from Candidato where id = " + id)
 				.uniqueResult();
+	}
+
+	public Candidato findByPrioridade(String matricula, int prioridade) {
+		return (Candidato) getSession().createQuery("from Candidato where aluno = " + matricula 
+				+ " and prioridade = " + prioridade).uniqueResult();
 	}
 
 	public void remove(int id) {
@@ -46,10 +60,10 @@ public class CandidatoDAO {
 
 	public void update(Candidato candidato) {
 		Candidato c = find(candidato.getId());
-		
+
 		// TODO parametros a serem atualizados..
 		c.setPrioridade(candidato.getPrioridade());
-		
+
 		getSession().beginTransaction();
 		getSession().update(c);
 		getSession().getTransaction().commit();	

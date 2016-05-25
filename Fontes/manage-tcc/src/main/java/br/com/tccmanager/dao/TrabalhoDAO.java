@@ -34,6 +34,21 @@ public class TrabalhoDAO {
 		return (Trabalho) getSession().createQuery("from Trabalho where id = " + id)
 				.uniqueResult();
 	}
+	
+	public List<Trabalho> findTrabalhosDisponiveis() {
+		return getSession().createQuery("from Trabalho where disponivel = 1").list();
+	}
+	
+	public List<Trabalho> findTrabalhosDisponiveisCandidatura(String matricula) {
+		return getSession().createQuery("from Trabalho where disponivel = 1 and id not in "
+				+ "(select trabalho from Candidato where aluno = " + matricula + ")").list();
+	}
+	
+	public Trabalho findTrabalhosDisponiveisCandidatura(int id, String matricula) {
+		return (Trabalho) getSession().createQuery("from Trabalho where id = " + id 
+				+ " disponivel = 1 and id not in "
+				+ "(select trabalho from Candidato where aluno = " + matricula + ")").uniqueResult();
+	}
 
 	public void remove(int id) {
 		Trabalho trabalho = find(id);

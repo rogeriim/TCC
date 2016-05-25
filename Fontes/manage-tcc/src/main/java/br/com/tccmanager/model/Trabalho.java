@@ -18,6 +18,7 @@ public class Trabalho {
 	private String status;
 	private Date data;
 	private boolean publicavel;
+	private boolean disponivel;
 	@ManyToOne
 	private Tema tema;
 	@ManyToOne
@@ -64,6 +65,12 @@ public class Trabalho {
 	}
 	public void setPublicavel(boolean publicavel) {
 		this.publicavel = publicavel;
+	}
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
 	}
 	public Tema getTema() {
 		return tema;

@@ -8,6 +8,7 @@ public class EstruturaTrabalho {
 	private Trabalho trabalho;
 	private List<Usuario> usuario;
 	private List<Tema> tema;
+	private List<Candidato> candidato;
 	
 	public int getId() {
 		return id;
@@ -32,6 +33,12 @@ public class EstruturaTrabalho {
 	}
 	public void setTema(List<Tema> tema) {
 		this.tema = tema;
+	}
+	public List<Candidato> getCandidato() {
+		return candidato;
+	}
+	public void setCandidato(List<Candidato> candidato) {
+		this.candidato = candidato;
 	}
 		
 }
