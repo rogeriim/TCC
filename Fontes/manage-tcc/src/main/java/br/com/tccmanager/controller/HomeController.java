@@ -38,7 +38,7 @@ public class HomeController {
 		usuarioWeb.login(carregado);
 		if(carregado.isPrimeiroAcesso())
 			result.redirectTo(this).primeiroLogin(carregado);
-		else result.redirectTo(TrabalhoController.class).listar();
+		else result.redirectTo(TrabalhoController.class).listar(carregado.getMatricula());
 	}
 
 	public Usuario primeiroLogin(Usuario usuario) {
@@ -62,7 +62,7 @@ public class HomeController {
 		System.out.println("senhaConfirmada: " + senhaConfirmada);
 		usuarioDao.alteraSenha(matricula, senhaConfirmada);
 
-		result.redirectTo(TrabalhoController.class).listar();
+		result.redirectTo(TrabalhoController.class).listar(matricula);
 	}
 
 	@Path("/logout")

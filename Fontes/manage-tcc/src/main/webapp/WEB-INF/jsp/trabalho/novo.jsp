@@ -28,8 +28,11 @@
 				<form action="adiciona" method="POST">
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<label for="titulo">Titulo</label> <input class="form-control"
+							<label for="titulo">Titulo</label> 
+							<input class="form-control"
 								id="titulo" name="trabalho.titulo">
+							<input class="form-control" type="hidden"
+								id="matricula" name="matricula" value="${usuarioWeb.getMatricula()}">
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="tema">Tema</label>

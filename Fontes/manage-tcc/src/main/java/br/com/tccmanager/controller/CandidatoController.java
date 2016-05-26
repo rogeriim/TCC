@@ -36,13 +36,29 @@ public class CandidatoController {
 		
 		candidato.setAluno(usuarioDao.find(matricula));
 		candidato.setTrabalho(trabalho);
+		candidato.setStatus("ABERTO");
 		
 		// Setando a prioridade automaticamente, conforme a ordem de inserção
 		int prioridade = dao.findAllByUser(matricula).size() + 1;
 		candidato.setPrioridade(prioridade);
 		
 		dao.create(candidato);
-		result.redirectTo(this).listar(candidato.getAluno().getMatricula());
+		result.redirectTo(this).listar(matricula);
+	}
+	
+	// método utilizado para salvar os interesses do aluno, uma vez salvo, não poderão mais ser alterados
+	@Restrito
+	public void salvar(String matricula) {
+		List<Candidato> candidatoList = new ArrayList<Candidato>();
+		
+		candidatoList = dao.findAllByUser(matricula);
+		
+		for (int i = 0; i < candidatoList.size(); i++) {
+			candidatoList.get(i).setStatus("FECHADO");
+			dao.update(candidatoList.get(i));
+		}
+		
+		result.redirectTo(this).listar(matricula);
 	}
 
 	@Restrito

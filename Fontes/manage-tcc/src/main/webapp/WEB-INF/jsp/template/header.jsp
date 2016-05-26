@@ -25,7 +25,9 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bar1">
 					<ul class="nav navbar-nav">
-						<li><a href="<c:url value="/trabalho/listar"/>" title="Trabalhos">Trabalhos</a></li>
+						<c:if test="${usuarioWeb.aluno }">
+							<li><a href="<c:url value="/trabalho/listar?matricula=${usuarioWeb.getMatricula()}"/>" title="Trabalhos">Trabalhos Disponíveis</a></li>
+						</c:if>
 						<li><a href="<c:url value="/monografia/listar"/>" title="Monografias">Monografias</a></li>
 						<c:if test="${usuarioWeb.aluno }">
 							<li><a href="<c:url value="/candidato/listar?matricula=${usuarioWeb.getMatricula()}" />" title="Candidaturas">Minhas opções</a></li>

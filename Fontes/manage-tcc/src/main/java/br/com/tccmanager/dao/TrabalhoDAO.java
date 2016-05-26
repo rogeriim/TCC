@@ -11,7 +11,7 @@ import br.com.tccmanager.util.HibernateUtil;
 @Component
 @SuppressWarnings("unchecked")
 public class TrabalhoDAO {
-	
+
 	private Session session;
 
 	private Session getSession() {
@@ -19,31 +19,39 @@ public class TrabalhoDAO {
 				getSessionFactory().openSession();
 		return session;
 	}
-	
+
 	public void create(Trabalho trabalho) {
 		getSession().beginTransaction();
 		getSession().persist(trabalho);
 		getSession().getTransaction().commit();
 	}
-	
+
 	public List<Trabalho> findAll() {
 		return getSession().createQuery("from Trabalho").list();
 	}
-	
+
+	public List<Trabalho> findAllDisponiveis() {
+		return getSession().createQuery("from Trabalho where disponivel = 1").list();
+	}
+
+	public List<Trabalho> findAllByProfessor(String matricula) {
+		return getSession().createQuery("from Trabalho where orientador = " + matricula).list();
+	}
+
 	public Trabalho find(int id) {
 		return (Trabalho) getSession().createQuery("from Trabalho where id = " + id)
 				.uniqueResult();
 	}
-	
+
 	public List<Trabalho> findTrabalhosDisponiveis() {
 		return getSession().createQuery("from Trabalho where disponivel = 1").list();
 	}
-	
+
 	public List<Trabalho> findTrabalhosDisponiveisCandidatura(String matricula) {
 		return getSession().createQuery("from Trabalho where disponivel = 1 and id not in "
 				+ "(select trabalho from Candidato where aluno = " + matricula + ")").list();
 	}
-	
+
 	public Trabalho findTrabalhosDisponiveisCandidatura(int id, String matricula) {
 		return (Trabalho) getSession().createQuery("from Trabalho where id = " + id 
 				+ " disponivel = 1 and id not in "
@@ -59,12 +67,12 @@ public class TrabalhoDAO {
 
 	public void update(Trabalho trabalho) {
 		Trabalho t = find(trabalho.getId());
-		
+
 		t.setTitulo(trabalho.getTitulo());
 		t.setDescricao(trabalho.getDescricao());
 		t.setTema(trabalho.getTema());
 		// TODO t.setOrientando(t.getOrientando());
-		
+
 		getSession().beginTransaction();
 		getSession().update(t);
 		getSession().getTransaction().commit();	

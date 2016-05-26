@@ -15,7 +15,6 @@ public class Trabalho {
 	private int id;
 	private String titulo;
 	private String descricao;
-	private String status;
 	private Date data;
 	private boolean publicavel;
 	private boolean disponivel;
@@ -47,12 +46,6 @@ public class Trabalho {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	public Date getData() {
 		return data;

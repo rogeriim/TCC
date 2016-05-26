@@ -10,10 +10,12 @@ import br.com.tccmanager.auth.Restrito;
 import br.com.tccmanager.dao.CandidatoDAO;
 import br.com.tccmanager.dao.TemaDAO;
 import br.com.tccmanager.dao.TrabalhoDAO;
+import br.com.tccmanager.dao.UsuarioDAO;
 import br.com.tccmanager.model.Candidato;
 import br.com.tccmanager.model.EstruturaTrabalho;
 import br.com.tccmanager.model.Tema;
 import br.com.tccmanager.model.Trabalho;
+import br.com.tccmanager.model.Usuario;
 
 @Resource
 public class TrabalhoController {
@@ -27,16 +29,29 @@ public class TrabalhoController {
 	}
 
 	@Restrito
-	public List<Trabalho> listar() {
-		return dao.findAll();
+	public List<Trabalho> listar(String matricula) {
+		UsuarioDAO userDao = new UsuarioDAO();
+		Usuario usuario = userDao.find(matricula);
+
+		if (usuario.getPerfil().getPerfil().equalsIgnoreCase("ALUNO")) 
+			return dao.findAllDisponiveis();
+		else return dao.findAllByProfessor(matricula);
+
 	}
 
 	@Restrito
-	public void adiciona(Trabalho trabalho, Tema tema) {
+	public void adiciona(Trabalho trabalho, Tema tema, String matricula) {
+		UsuarioDAO userDao = new UsuarioDAO();
+
+		Usuario orientador = userDao.find(matricula);
+
 		trabalho.setTema(tema);
 		trabalho.setData(new Date());
+		trabalho.setOrientador(orientador);
+		trabalho.setDisponivel(true);
+
 		dao.create(trabalho);
-		result.redirectTo(this).listar();
+		result.redirectTo(this).listar(matricula);
 	}
 
 	@Restrito
@@ -57,8 +72,9 @@ public class TrabalhoController {
 
 	@Restrito
 	public void remove(int id) {
+		Trabalho trabalho = dao.find(id);
 		dao.remove(id);
-		result.redirectTo(this).listar();
+		result.redirectTo(this).listar(trabalho.getOrientador().getMatricula());
 	}
 
 	@Restrito
@@ -82,26 +98,57 @@ public class TrabalhoController {
 		// TODO implementar atualização de orientando também..
 
 		dao.update(trabalho);
-		result.redirectTo(this).listar();
+		result.redirectTo(this).listar(trabalho.getOrientador().getMatricula());
 	}
 
 	@Restrito
 	public EstruturaTrabalho ver(int id, String matricula) {
 		EstruturaTrabalho estrutura = new EstruturaTrabalho();
+		CandidatoDAO candidatoDao = new CandidatoDAO();
 
 		estrutura.setTrabalho(dao.find(id));
 
-		// verifica se o aluno logado já é candidato àquele trabalho..
+		// verifica se o aluno ainda possui a opção para se candidatar..
 		List<Candidato> candidatoList = new ArrayList<Candidato>();
-		CandidatoDAO candidatoDao = new CandidatoDAO();
+		candidatoList = candidatoDao.findAllByUser(matricula);
+
+		if ((!candidatoList.isEmpty() && candidatoList.size() < 3)) {
+			if (candidatoList.get(0).getStatus().equalsIgnoreCase("FECHADO")) {
+				estrutura.setMostrarOpcaoCandidatura(false);
+				return estrutura;
+			}
+		}
+
 		Candidato candidato = candidatoDao.findByTrabalhoAndMatricula(id, matricula);
 
+		// verifica se o aluno logado já é candidato àquele trabalho..
 		if (candidato != null) {
 			candidatoList.add(candidatoDao.findByTrabalhoAndMatricula(id, matricula));
 			estrutura.setCandidato(candidatoList);
 		}
 
 		return estrutura;
+	}
+
+	@Restrito
+	public void desfazer(String id, String matricula) {
+		EstruturaTrabalho estrutura = new EstruturaTrabalho();
+
+		estrutura.setTrabalho(dao.find(Integer.parseInt(id)));
+
+		CandidatoDAO candidatoDao = new CandidatoDAO();
+		Candidato candidato = candidatoDao.findByTrabalhoAndMatricula(Integer.parseInt(id), matricula);
+
+		// Atualiza as prioridades, decrementando para ajustar as ordens
+		for (int i = candidato.getPrioridade(); i < candidatoDao.findAllByUser(matricula).size(); i++) {
+			Candidato next = candidatoDao.findByPrioridade(matricula, (i + 1));
+			next.setPrioridade(i);
+			candidatoDao.update(next);
+		}
+
+		candidatoDao.remove(candidato.getId());
+
+		result.redirectTo(this).ver(Integer.parseInt(id), matricula);
 	}
 
 }

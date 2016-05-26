@@ -18,12 +18,12 @@
 
 			<div class="container">
 
-				<h3 class="page-header">${trabalho.getTitulo() }</h3>
+				<h3 class="page-header">${estruturaTrabalho.trabalho.getTitulo() }</h3>
 
 				<div class="row">
 					<div class="col-sm-12">
 						<label><strong>Tema</strong></label>
-						<p>${trabalho.getTema().getTema() }</p>
+						<p>${estruturaTrabalho.trabalho.getTema().getTema() }</p>
 					</div>
 
 					<div class="row">
@@ -69,16 +69,26 @@
 
 				<div id="actions" class="row">
 					<div class="col-sm-7">
-						<a href="<c:url value="/trabalho/listar"/>" class="btn btn-link">Voltar</a>
+						<a href="<c:url value="/trabalho/listar?matricula=${usuarioWeb.getMatricula()}"/>" class="btn btn-link">Voltar</a>
 
-						<c:if test="${usuarioWeb.aluno }">
+						<c:if test="${usuarioWeb.aluno and estruturaTrabalho.mostrarOpcaoCandidatura}">
+
 							<c:if test="${fn:length(estruturaTrabalho.candidato) lt 1}">
 								<div class="btn-group pull-right">
-									<span class="carret"> <a
-										href="<c:url value="/candidato/criar?id=${trabalho.getId()}
+									<span class="carret"> 
+										<a href="<c:url value="/candidato/criar?id=${estruturaTrabalho.trabalho.getId()}
 																	&matricula=${usuarioWeb.getMatricula() }" />"
-										class="btn btn-primary" type="submit"> Candidatar-me ao
-											trabalho </a>
+										class="btn btn-primary" type="submit">Candidatar-me ao
+											trabalho</a>
+									</span>
+								</div>
+							</c:if>
+							<c:if test="${fn:length(estruturaTrabalho.candidato) == 1}">
+								<div class="btn-group pull-right">
+									<span class="carret"> 
+										<a href="<c:url value="/trabalho/desfazer?id=${estruturaTrabalho.trabalho.getId()}
+																	&matricula=${usuarioWeb.getMatricula() }" />"
+										class="btn btn-danger" type="submit">Desfazer candidatura</a>
 									</span>
 								</div>
 							</c:if>

@@ -9,6 +9,7 @@ public class EstruturaTrabalho {
 	private List<Usuario> usuario;
 	private List<Tema> tema;
 	private List<Candidato> candidato;
+	private boolean mostrarOpcaoCandidatura = true;
 	
 	public int getId() {
 		return id;
@@ -39,6 +40,12 @@ public class EstruturaTrabalho {
 	}
 	public void setCandidato(List<Candidato> candidato) {
 		this.candidato = candidato;
+	}
+	public boolean isMostrarOpcaoCandidatura() {
+		return mostrarOpcaoCandidatura;
+	}
+	public void setMostrarOpcaoCandidatura(boolean mostrarOpcaoCandidatura) {
+		this.mostrarOpcaoCandidatura = mostrarOpcaoCandidatura;
 	}
 		
 }

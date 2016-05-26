@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/jsp/template/head.jsp" />
 
@@ -27,47 +27,62 @@
 				<hr />
 
 				<c:if test="${empty candidatoList }">
-					<p align="center">Você ainda não demonstrou interesse em realizar algum dos
-						trabalhos disponíveis.</p>
+					<p align="center">Você ainda não demonstrou interesse em
+						realizar algum dos trabalhos disponíveis.</p>
 					<div class="col-sm-7">
 						<div class="btn-group pull-right">
-							<a href="<c:url value="/candidato/criar?matricula=${usuarioWeb.getMatricula() }"/>"
+							<a
+								href="<c:url value="/candidato/criar?matricula=${usuarioWeb.getMatricula() }"/>"
 								class="btn btn-primary h2 ">Adicionar novo</a>
 						</div>
 					</div>
-						
+
 				</c:if>
 
 				<c:if test="${not empty candidatoList }">
-				<table id="bootstrap-table" class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th><strong>Título trabalho</strong></th>
-							<th><strong>Prioridade</strong></th>
-							<th><strong>Orientador</strong></th>
-							<th class="actions">
-								<c:if test="${fn:length(candidatoList) lt 3}" >
-									<a href="<c:url value="/candidato/criar?matricula=${usuarioWeb.getMatricula() }"/>"
-										class="btn btn-primary h2">Adicionar novo</a>
-								</c:if>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${candidatoList}" var="candidato">
+					<table id="bootstrap-table" class="table table-striped table-hover">
+						<thead>
 							<tr>
-								<td>${candidato.getTrabalho().getTitulo() }</td>
-								<td>${candidato.getPrioridade() }</td>
-								<td>${candidato.getTrabalho().getOrientador().getNome() }</td>
-								<td class="actions"><a class="btn btn-primary btn-xs"
-									href="editar?id=${candidato.getId()}">Editar</a> <a
-									class="btn btn-danger btn-xs" data-toggle="modal"
-									id="${candidato.getId()}" data-target="#delete-modal">Excluir</a>
-								</td>
+								<th><strong>Título trabalho</strong></th>
+								<th><strong>Prioridade</strong></th>
+								<th><strong>Orientador</strong></th>
+								<th><strong>Status</strong></th>
+								<th class="actions">
+									<c:if test="${candidatoList[0].getStatus() == 'ABERTO' }">
+										<c:if test="${fn:length(candidatoList) lt 3}">
+											<a href="<c:url value="/candidato/criar?matricula=${usuarioWeb.getMatricula() }"/>"
+												class="btn btn-primary h2">Adicionar novo</a>
+										</c:if>
+									</c:if>
+								</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach items="${candidatoList}" var="candidato">
+								<tr>
+									<td>${candidato.getTrabalho().getTitulo() }</td>
+									<td>${candidato.getPrioridade() }</td>
+									<td>${candidato.getTrabalho().getOrientador().getNome() }</td>
+									<td>${candidato.getStatus() }</td>
+									<c:if test="${candidato.getStatus() == 'ABERTO' }">
+										<td class="actions"><a class="btn btn-danger btn-xs"
+											data-toggle="modal" id="${candidato.getId()}"
+											data-target="#delete-modal">Excluir</a></td>
+									</c:if>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+					<c:if test="${candidatoList[0].getStatus() == 'ABERTO' }">
+						<div class="col-sm-7">
+							<div class="btn-group pull-right">
+								<a href="<c:url value="/candidato/salvar?matricula=${usuarioWeb.getMatricula() }"/>"
+								class="btn btn-primary h2 ">Salvar Interesses</a>
+							</div>
+						</div>
+					</c:if>
+
 				</c:if>
 
 			</div>

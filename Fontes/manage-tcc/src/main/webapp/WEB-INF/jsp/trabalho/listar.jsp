@@ -52,7 +52,7 @@
 								</c:if>
 								<td>${trabalho.getTema().getTema() }</td>
 								<c:if test="${usuarioWeb.aluno }">
-									<td>${trabalho.getOrientador().getNome }</td>
+									<td>${trabalho.getOrientador().getNome() }</td>
 								</c:if>
 								<td class="actions"><a class="btn btn-primary btn-xs"
 									href="ver?id=${trabalho.getId()}&matricula=${usuarioWeb.getMatricula() }">Visualizar</a> 
