@@ -15,9 +15,9 @@ public class Trabalho {
 	private int id;
 	private String titulo;
 	private String descricao;
+	private String status;
 	private Date data;
 	private boolean publicavel;
-	private boolean disponivel;
 	@ManyToOne
 	private Tema tema;
 	@ManyToOne
@@ -47,6 +47,12 @@ public class Trabalho {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Date getData() {
 		return data;
 	}
@@ -58,12 +64,6 @@ public class Trabalho {
 	}
 	public void setPublicavel(boolean publicavel) {
 		this.publicavel = publicavel;
-	}
-	public boolean isDisponivel() {
-		return disponivel;
-	}
-	public void setDisponivel(boolean disponivel) {
-		this.disponivel = disponivel;
 	}
 	public Tema getTema() {
 		return tema;

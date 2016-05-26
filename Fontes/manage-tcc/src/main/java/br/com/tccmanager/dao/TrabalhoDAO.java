@@ -31,7 +31,7 @@ public class TrabalhoDAO {
 	}
 
 	public List<Trabalho> findAllDisponiveis() {
-		return getSession().createQuery("from Trabalho where disponivel = 1").list();
+		return getSession().createQuery("from Trabalho where status = 'ABERTO'").list();
 	}
 
 	public List<Trabalho> findAllByProfessor(String matricula) {
@@ -44,17 +44,17 @@ public class TrabalhoDAO {
 	}
 
 	public List<Trabalho> findTrabalhosDisponiveis() {
-		return getSession().createQuery("from Trabalho where disponivel = 1").list();
+		return getSession().createQuery("from Trabalho where status = 'ABERTO'").list();
 	}
 
 	public List<Trabalho> findTrabalhosDisponiveisCandidatura(String matricula) {
-		return getSession().createQuery("from Trabalho where disponivel = 1 and id not in "
+		return getSession().createQuery("from Trabalho where status = 'ABERTO' and id not in "
 				+ "(select trabalho from Candidato where aluno = " + matricula + ")").list();
 	}
 
 	public Trabalho findTrabalhosDisponiveisCandidatura(int id, String matricula) {
 		return (Trabalho) getSession().createQuery("from Trabalho where id = " + id 
-				+ " disponivel = 1 and id not in "
+				+ " status = 'ABERTO' and id not in "
 				+ "(select trabalho from Candidato where aluno = " + matricula + ")").uniqueResult();
 	}
 
@@ -71,7 +71,7 @@ public class TrabalhoDAO {
 		t.setTitulo(trabalho.getTitulo());
 		t.setDescricao(trabalho.getDescricao());
 		t.setTema(trabalho.getTema());
-		// TODO t.setOrientando(t.getOrientando());
+		t.setOrientando(trabalho.getOrientando());
 
 		getSession().beginTransaction();
 		getSession().update(t);

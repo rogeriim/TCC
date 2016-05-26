@@ -65,9 +65,10 @@
 									<td>${candidato.getTrabalho().getOrientador().getNome() }</td>
 									<td>${candidato.getStatus() }</td>
 									<c:if test="${candidato.getStatus() == 'ABERTO' }">
-										<td class="actions"><a class="btn btn-danger btn-xs"
-											data-toggle="modal" id="${candidato.getId()}"
-											data-target="#delete-modal">Excluir</a></td>
+										<td class="actions">
+											<a class="btn btn-danger btn-xs"
+												data-toggle="modal" id="${candidato.getId()}"
+												data-target="#delete-modal">Excluir</a></td>
 									</c:if>
 								</tr>
 							</c:forEach>
@@ -77,8 +78,8 @@
 					<c:if test="${candidatoList[0].getStatus() == 'ABERTO' }">
 						<div class="col-sm-7">
 							<div class="btn-group pull-right">
-								<a href="<c:url value="/candidato/salvar?matricula=${usuarioWeb.getMatricula() }"/>"
-								class="btn btn-primary h2 ">Salvar Interesses</a>
+								<a class="btn btn-primary" data-toggle="modal" id="${candidatoList[0].getAluno().getMatricula() }"
+									data-target="#save-interesse-modal" >Salvar Interesses</a>
 							</div>
 						</div>
 					</c:if>
@@ -105,6 +106,26 @@
 						candidatura para realizar o trabalho?</div>
 					<div class="modal-footer">
 						<a type="submit" class="btn btn-primary" id="deletar">Sim</a> <a
+							type="button" class="btn btn-default" data-dismiss="modal">Não</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="save-interesse-modal" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Salvar Interesses</h4>
+					</div>
+					<div class="modal-body">Se você salvar seus interesses, não será possível realizar
+						alterações posteriormente e nem se candidatar a outros trabalhos de seu interesse.
+						Deseja realmente executar esta operação?</div>
+					<div class="modal-footer">
+						<a type="submit" class="btn btn-primary" id="salvar">Sim</a> <a
 							type="button" class="btn btn-default" data-dismiss="modal">Não</a>
 					</div>
 				</div>

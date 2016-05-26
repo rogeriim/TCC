@@ -19,6 +19,26 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+	$('#save-modal').on('show.bs.modal', function(e) {
+		var $modal = $(this),
+		id = e.relatedTarget.id;
+
+		$(this).find("#salvar").attr("href", "salvar?id=" + id);
+
+	});
+});
+
+$(document).ready(function() {
+	$('#save-interesse-modal').on('show.bs.modal', function(e) {
+		var $modal = $(this),
+		id = e.relatedTarget.id;
+
+		$(this).find("#salvar").attr("href", "salvar?id=" + id);
+
+	});
+});
+
+$(document).ready(function() {
 	$('#insere-tema').on('show.bs.modal', function(e) {
 		var $modal = $(this),
 		id = e.relatedTarget.id;

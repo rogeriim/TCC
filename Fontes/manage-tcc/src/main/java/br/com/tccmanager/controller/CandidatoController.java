@@ -11,6 +11,7 @@ import br.com.tccmanager.dao.TrabalhoDAO;
 import br.com.tccmanager.dao.UsuarioDAO;
 import br.com.tccmanager.model.Candidato;
 import br.com.tccmanager.model.Trabalho;
+import br.com.tccmanager.util.EmailUtil;
 
 @Resource
 public class CandidatoController {
@@ -48,17 +49,28 @@ public class CandidatoController {
 	
 	// método utilizado para salvar os interesses do aluno, uma vez salvo, não poderão mais ser alterados
 	@Restrito
-	public void salvar(String matricula) {
+	public void salvar(String id) {
 		List<Candidato> candidatoList = new ArrayList<Candidato>();
 		
-		candidatoList = dao.findAllByUser(matricula);
+		System.out.println("Passou aqui: " + id);
+		candidatoList = dao.findAllByUser(id);
 		
 		for (int i = 0; i < candidatoList.size(); i++) {
 			candidatoList.get(i).setStatus("FECHADO");
+			
+			// envia email para os orientadores informando o interesse do aluno
+			EmailUtil.sendEmail(candidatoList.get(i).getTrabalho().getOrientador().getEmail(),
+					"[TCC] Aluno interessado em realizar o trabalho \"" + candidatoList.get(i).getTrabalho().getTitulo() + "\"",
+					"Olá, professor " + candidatoList.get(i).getTrabalho().getOrientador().getNome() + "."
+					+ "\n\nO aluno <i>" + candidatoList.get(i).getAluno().getNome() + "</i> manifestou interesse em realizar o trabalho <i>"
+					+ candidatoList.get(i).getTrabalho().getTitulo() + "</i> disponibilizado por você. Para selecionar o aluno "
+					+ "para ser seu orientando no desenvolvimento do trabalho, acesse a aplicação TCC Manager e vá à pagina "
+					+ "de edição do trabalho.\n\nAtt.");
+			
 			dao.update(candidatoList.get(i));
 		}
 		
-		result.redirectTo(this).listar(matricula);
+		result.redirectTo(this).listar(id);
 	}
 
 	@Restrito

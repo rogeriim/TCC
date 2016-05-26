@@ -16,6 +16,7 @@ import br.com.tccmanager.model.EstruturaTrabalho;
 import br.com.tccmanager.model.Tema;
 import br.com.tccmanager.model.Trabalho;
 import br.com.tccmanager.model.Usuario;
+import br.com.tccmanager.util.EmailUtil;
 
 @Resource
 public class TrabalhoController {
@@ -48,7 +49,7 @@ public class TrabalhoController {
 		trabalho.setTema(tema);
 		trabalho.setData(new Date());
 		trabalho.setOrientador(orientador);
-		trabalho.setDisponivel(true);
+		trabalho.setStatus("ABERTO");
 
 		dao.create(trabalho);
 		result.redirectTo(this).listar(matricula);
@@ -86,19 +87,24 @@ public class TrabalhoController {
 		TemaDAO temaDao = new TemaDAO();
 		estrutura.setTema(temaDao.findAll());
 
-		// TODO implementar Query para buscar alunos interessados em realizar o trabalho.
+		CandidatoDAO candidatoDao = new CandidatoDAO();
+		List<Candidato> candidatoList = candidatoDao.findByTrabalhoInteresse(id);
+
+		estrutura.setCandidato(candidatoList);
 
 		return estrutura;
 	}
 
 	@Restrito
-	public void altera(Trabalho trabalho, Tema tema) {
+	public void altera(Trabalho trabalho, Tema tema, String matriculaOrientando, String matricula) {		
 		trabalho.setTema(tema);
-		System.out.println("Descricao: " + trabalho.getDescricao());
-		// TODO implementar atualização de orientando também..
+
+		UsuarioDAO userDao = new UsuarioDAO();
+
+		trabalho.setOrientando(userDao.find(matriculaOrientando));
 
 		dao.update(trabalho);
-		result.redirectTo(this).listar(trabalho.getOrientador().getMatricula());
+		result.redirectTo(this).listar(matricula);
 	}
 
 	@Restrito
@@ -112,13 +118,15 @@ public class TrabalhoController {
 		List<Candidato> candidatoList = new ArrayList<Candidato>();
 		candidatoList = candidatoDao.findAllByUser(matricula);
 
-		if ((!candidatoList.isEmpty() && candidatoList.size() < 3)) {
+		if ((!candidatoList.isEmpty() && candidatoList.size() <= 3)) {
 			if (candidatoList.get(0).getStatus().equalsIgnoreCase("FECHADO")) {
 				estrutura.setMostrarOpcaoCandidatura(false);
 				return estrutura;
 			}
 		}
 
+		// limpa a lista de candidaturas..
+		candidatoList.clear();
 		Candidato candidato = candidatoDao.findByTrabalhoAndMatricula(id, matricula);
 
 		// verifica se o aluno logado já é candidato àquele trabalho..
@@ -149,6 +157,31 @@ public class TrabalhoController {
 		candidatoDao.remove(candidato.getId());
 
 		result.redirectTo(this).ver(Integer.parseInt(id), matricula);
+	}
+
+	@Restrito
+	public void salvar(int id) {
+		Trabalho trabalho = dao.find(id);
+
+		if (trabalho.getOrientando() != null) {
+			trabalho.setStatus("FECHADO");
+
+			// envia email para o aluno informando que ele foi selecionado
+			EmailUtil.sendEmail(trabalho.getOrientando().getEmail(),
+					"[TCC] Você foi selecionado para realizar o trabalho \"" + trabalho.getTitulo() + "\"",
+					"Olá, " + trabalho.getOrientando().getNome() + "."
+							+ "<br><br>Este é um email automático para informar que você foi selecionado pelo professor <i>" 
+							+ trabalho.getOrientador().getNome() + "</i> para realizar o trabalho <i>"
+							+ trabalho.getTitulo() + "</i>. Você deverá procurá-lo em sua sala ou enviar um e-mail para "
+							+ trabalho.getOrientador().getEmail() + " para alinhar o que deverá ser feito e começar o desenvolvimento "
+							+ "de seu TCC.<br><br>Att.");
+
+			dao.update(trabalho);
+		} else {
+			System.out.println("Não é possível fechar um trabalho se não tiver um orientando selecionado.");
+		}
+
+		result.redirectTo(this).listar(trabalho.getOrientador().getMatricula());
 	}
 
 }

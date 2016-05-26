@@ -40,6 +40,12 @@ public class CandidatoDAO {
 	public List<Candidato> findByTrabalho(int id) {
 		return getSession().createQuery("from Candidato where trabalho = " + id).list();
 	}
+	
+	public List<Candidato> findByTrabalhoInteresse(int id) {
+		return getSession().createQuery("from Candidato c where c.trabalho = " + id
+				+ " and c.status = 'FECHADO' and c.aluno not in ("
+				+ "select orientando from Trabalho where status = 'FECHADO')").list();
+	}
 
 	public Candidato find(int id) {
 		return (Candidato) getSession().createQuery("from Candidato where id = " + id)

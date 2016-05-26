@@ -30,7 +30,7 @@
 						</c:if>
 						<li><a href="<c:url value="/monografia/listar"/>" title="Monografias">Monografias</a></li>
 						<c:if test="${usuarioWeb.aluno }">
-							<li><a href="<c:url value="/candidato/listar?matricula=${usuarioWeb.getMatricula()}" />" title="Candidaturas">Minhas opções</a></li>
+							<li><a href="<c:url value="/candidato/listar?matricula=${usuarioWeb.getMatricula()}" />" title="Candidaturas">Meus interesses</a></li>
 						</c:if>
 						<c:if test="${usuarioWeb.administrador }">
 							<li><a href="<c:url value="/usuario/listar"/>" title="Usuários">Usuários</a></li>
@@ -39,6 +39,7 @@
 						</c:if>
 						<c:if test="${usuarioWeb.professor || usuarioWeb.administrador }">
 							<li><a href="<c:url value="/banca/listar"/>" title="Bancas">Bancas</a></li>
+							<li><a href="<c:url value="/trabalho/listar?matricula=${usuarioWeb.getMatricula()}"/>" title="Trabalhos">Trabalhos</a></li>
 						</c:if>
 					</ul>
 				</div>

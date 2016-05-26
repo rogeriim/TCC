@@ -21,11 +21,13 @@
 				<form action="altera" method="POST">
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<label for="titulo">Título</label> <input class="form-control"
-								type="hidden" id="id" name="trabalho.id"
-								value="${estruturaTrabalho.trabalho.getId() }"> <input
-								class="form-control" id="titulo" name="trabalho.titulo"
+							<label for="titulo">Título</label> 
+							<input class="form-control" type="hidden" id="id" name="trabalho.id"
+								value="${estruturaTrabalho.trabalho.getId() }"> 
+							<input class="form-control" id="titulo" name="trabalho.titulo"
 								value="${estruturaTrabalho.trabalho.getTitulo() }">
+							<input class="form-control" type="hidden" id="orientador" name="matricula"
+								value="${usuarioWeb.getMatricula() }">
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="tema">Tema</label>
@@ -33,9 +35,10 @@
 								<div class="col-md-12 form-actions">
 									<select class="btn btn-default" name="tema.id">
 										<c:forEach items="${estruturaTrabalho.tema}" var="tema">
-											<option value="${tema.getId() }">${tema.getTema() }</option>
+											<option <c:if test="${estruturaTrabalho.trabalho.getTema().getTema() == tema.getTema() }" >selected="selected"</c:if> 
+											value="${tema.getId() }">${tema.getTema() }</option>
 										</c:forEach>
-										<option>Selecionar Tema</option>
+										
 									</select> <a class="btn btn-primary" data-toggle="modal"
 										id="${estruturaTrabalho.trabalho.getId() }" data-target="#insere-tema">Adicionar
 										novo Tema</a>
@@ -49,16 +52,20 @@
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="orientando">Orientando</label>
-							<div class="row">
-								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="usuario.id">
-										<c:forEach items="${estruturaTrabalho.usuario}" var="usuario">
-											<option value="${usuario.getId() }">${usuario.getNome() }</option>
-										</c:forEach>
-										<option>Selecionar Orientando</option>
-									</select>
+							<c:if test="${empty estruturaTrabalho.candidato }" >
+								<p>Este trabalho ainda não possui alunos interessados em desenvolvê-lo</p>
+							</c:if>
+							<c:if test="${not empty estruturaTrabalho.candidato }" >
+								<div class="row">
+									<div class="col-md-12 form-actions">
+										<select class="btn btn-default" name="matriculaOrientando">
+											<c:forEach items="${estruturaTrabalho.candidato }" var="candidato">
+												<option value="${candidato.getAluno().getMatricula() }">${candidato.getAluno().getNome() }</option>
+											</c:forEach>
+										</select>
+									</div>
 								</div>
-							</div>
+							</c:if>
 						</div>
 					</div>
 
@@ -67,7 +74,8 @@
 					<div class="row">
 						<div class="col-md-12 form-actions">
 							<button type="submit" class="btn btn-primary">Atualizar</button>
-							<a href="trabalhos.html" class="btn btn-default">Cancelar</a>
+							<a href="<c:url value="/trabalho/listar?matricula=${usuarioWeb.getMatricula()}"/>" 
+								class="btn btn-default">Cancelar</a>
 						</div>
 					</div>
 
