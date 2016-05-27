@@ -1,4 +1,4 @@
-package br.com.tccmanager.service;
+package br.com.tccmanager.test;
 
 import java.util.List;
 

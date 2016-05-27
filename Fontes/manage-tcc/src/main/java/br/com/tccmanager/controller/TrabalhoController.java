@@ -36,7 +36,7 @@ public class TrabalhoController {
 
 		if (usuario.getPerfil().getPerfil().equalsIgnoreCase("ALUNO")) 
 			return dao.findAllDisponiveis();
-		else return dao.findAllByProfessor(matricula);
+		else return dao.findAllByOrientador(matricula);
 
 	}
 
@@ -58,12 +58,17 @@ public class TrabalhoController {
 	@Restrito
 	public List<Tema> novo() {
 		TemaDAO temaDao = new TemaDAO();
-		return temaDao.findAll();
+		return temaDao.findAllAprovados();
 	}
 
 	@Restrito
-	public void adicionaTema(Tema tema, String pagina, int trabalhoId) {
+	public void adicionaTema(Tema tema, String pagina, String matricula, int trabalhoId) {
 		TemaDAO temaDao = new TemaDAO();
+		UsuarioDAO userDao = new UsuarioDAO();
+
+		tema.setStatus("PENDENTE APROVACAO");
+		tema.setAdicionadoPor(userDao.find(matricula));
+
 		temaDao.create(tema);
 
 		if (pagina.equalsIgnoreCase("editar"))
@@ -85,7 +90,7 @@ public class TrabalhoController {
 		estrutura.setTrabalho(dao.find(id));
 
 		TemaDAO temaDao = new TemaDAO();
-		estrutura.setTema(temaDao.findAll());
+		estrutura.setTema(temaDao.findAllAprovados());
 
 		CandidatoDAO candidatoDao = new CandidatoDAO();
 		List<Candidato> candidatoList = candidatoDao.findByTrabalhoInteresse(id);
@@ -101,7 +106,9 @@ public class TrabalhoController {
 
 		UsuarioDAO userDao = new UsuarioDAO();
 
-		trabalho.setOrientando(userDao.find(matriculaOrientando));
+		if (matriculaOrientando.equalsIgnoreCase("NENHUM"))
+			trabalho.setOrientando(userDao.find(matriculaOrientando));
+		else trabalho.setOrientador(null);
 
 		dao.update(trabalho);
 		result.redirectTo(this).listar(matricula);

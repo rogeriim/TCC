@@ -29,6 +29,10 @@ public class BancaDAO {
 	public List<Banca> findAll() {
 		return getSession().createQuery("from Banca").list();
 	}
+	
+	public List<Banca> findAllByCriador(String matricula) {
+		return getSession().createQuery("from Banca where criadoPor = " + matricula).list();
+	}
 
 	public Banca find(int id) {
 		return (Banca) getSession().createQuery("from Banca where id = " + id)

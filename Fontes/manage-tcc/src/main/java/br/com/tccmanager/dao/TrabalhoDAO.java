@@ -34,8 +34,13 @@ public class TrabalhoDAO {
 		return getSession().createQuery("from Trabalho where status = 'ABERTO'").list();
 	}
 
-	public List<Trabalho> findAllByProfessor(String matricula) {
+	public List<Trabalho> findAllByOrientador(String matricula) {
 		return getSession().createQuery("from Trabalho where orientador = " + matricula).list();
+	}
+	
+	public List<Trabalho> findAllFechadosByProfessor(String matricula) {
+		return getSession().createQuery("from Trabalho where orientador = " + matricula
+				+ " and status = 'FECHADO'").list();
 	}
 
 	public Trabalho find(int id) {

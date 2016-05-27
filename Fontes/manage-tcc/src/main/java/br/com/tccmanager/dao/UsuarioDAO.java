@@ -42,6 +42,7 @@ public class UsuarioDAO {
 
 	public void alteraSenha(String matricula, String novaSenha) {
 		Usuario usuario = find(matricula);
+
 		usuario.setSenha(CriptografiaUtil.criptografar(novaSenha));
 		usuario.setPrimeiroAcesso(false);
 
@@ -53,7 +54,15 @@ public class UsuarioDAO {
 	public List<Usuario> findAll() {
 		return getSession().createQuery("from Usuario").list();
 	}
-	
+
+	public List<Usuario> findAllByPerfil(String perfil) {
+		if (perfil.equalsIgnoreCase("PROFESSOR"))
+			return getSession().createQuery("from Usuario where perfil_id in "
+					+ "(select id from Perfil where perfil in ('" + perfil + "' , 'ADMINISTRADOR'))").list();
+		else return getSession().createQuery("from Usuario where perfil_id = "
+				+ "(select id from Perfil where perfil = " + perfil + ")").list();
+	}
+
 	public void remove(String matricula) {
 		Usuario usuario = find(matricula);
 		getSession().beginTransaction();
@@ -63,7 +72,7 @@ public class UsuarioDAO {
 
 	public void update(Usuario usuario) {
 		Usuario user = find(usuario.getMatricula());
-		
+
 		user.setEmail(usuario.getEmail());
 		user.setNome(usuario.getNome());
 
@@ -71,5 +80,5 @@ public class UsuarioDAO {
 		getSession().update(user);
 		getSession().getTransaction().commit();	
 	}
-	
+
 }

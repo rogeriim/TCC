@@ -62,6 +62,7 @@
 											<c:forEach items="${estruturaTrabalho.candidato }" var="candidato">
 												<option value="${candidato.getAluno().getMatricula() }">${candidato.getAluno().getNome() }</option>
 											</c:forEach>
+											<option value="Nenhum">Nenhum</option>
 										</select>
 									</div>
 								</div>
@@ -104,11 +105,11 @@
 				<div class="modal-body" style="padding: 40px 50px;">
 					<form role="form" action="adicionaTema" method="POST">
 						<div class="form-group">
-							<label for="usrname">Tema</label> <input type="text"
-								class="form-control" id="tema" name="tema.tema"
-								placeholder="Novo Tema"> <input type="hidden"
-								name="pagina" value="editar"> <input type="hidden"
-								id="trabalhoId" name="trabalhoId">
+							<label for="usrname">Tema</label> 
+							<input type="text" class="form-control" id="tema" name="tema.tema" placeholder="Novo Tema"> 
+							<input type="hidden" name="pagina" value="editar"> 
+							<input type="hidden" id="trabalhoId" name="trabalhoId">
+							<input type="hidden" name="matricula" value="${usuarioWeb.getMatricula() }">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">
 							Adicionar</button>

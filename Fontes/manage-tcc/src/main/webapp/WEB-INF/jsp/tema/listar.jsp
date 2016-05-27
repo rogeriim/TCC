@@ -30,6 +30,7 @@
 						<tr>
 							<th><strong>Id</strong></th>
 							<th><strong>Tema</strong></th>
+							<th><strong>Status</strong></th>
 							<th class="actions"><a class="btn btn-primary" href="#"
 								data-toggle="modal" id="adicionarTema">Adicionar novo</a></th>
 						</tr>
@@ -39,7 +40,12 @@
 							<tr>
 								<td>${tema.getId() }</td>
 								<td>${tema.getTema() }</td>
+								<td>${tema.getStatus() }</td>
 								<td class="actions">
+								<c:if test="${tema.getStatus() != 'APROVADO'}" >
+									<a class="btn btn-primary btn-xs"
+										href="aprovar?id=${tema.getId()}">Aprovar</a>
+								</c:if>
 								<a class="btn btn-danger btn-xs" data-toggle="modal"
 									id="${tema.getId()}" data-target="#delete-modal">Excluir</a>
 								</td>
@@ -70,6 +76,7 @@
 						<div class="form-group">
 							<label for="tema">Tema</label> 
 							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
+							<input type="hidden" name="matricula" value="${usuarioWeb.getMatricula() }">
 							<input type="hidden" name="pagina" value="novo">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">

@@ -27,20 +27,32 @@
 					<ul class="nav navbar-nav">
 						<c:if test="${usuarioWeb.aluno }">
 							<li><a href="<c:url value="/trabalho/listar?matricula=${usuarioWeb.getMatricula()}"/>" title="Trabalhos">Trabalhos Disponíveis</a></li>
-						</c:if>
-						<li><a href="<c:url value="/monografia/listar"/>" title="Monografias">Monografias</a></li>
-						<c:if test="${usuarioWeb.aluno }">
 							<li><a href="<c:url value="/candidato/listar?matricula=${usuarioWeb.getMatricula()}" />" title="Candidaturas">Meus interesses</a></li>
 						</c:if>
-						<c:if test="${usuarioWeb.administrador }">
-							<li><a href="<c:url value="/usuario/listar"/>" title="Usuários">Usuários</a></li>
-							<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
-							<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
-						</c:if>
 						<c:if test="${usuarioWeb.professor || usuarioWeb.administrador }">
-							<li><a href="<c:url value="/banca/listar"/>" title="Bancas">Bancas</a></li>
 							<li><a href="<c:url value="/trabalho/listar?matricula=${usuarioWeb.getMatricula()}"/>" title="Trabalhos">Trabalhos</a></li>
+							<li class="dropdown">
+        						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Bancas
+        						<span class="caret"></span></a>
+        						<ul class="dropdown-menu">
+          							<li><a href="<c:url value="/banca/listar?matricula=${usuarioWeb.getMatricula()}"/>" title="Ver bancas">Ver bancas</a></li>
+          							<li><a href="<c:url value="/solicitacao/listar?matricula=${usuarioWeb.getMatricula()}"/>" title="Solicitações abertas">Solicitações abertas</a></li>
+          							<li><a href="<c:url value="/solicitacao/pendencias?matricula=${usuarioWeb.getMatricula()}"/>" title="Solicitações pendentes">Solicitações pendentes</a></li> 
+       							 </ul>
+      						</li>
 						</c:if>
+						<c:if test="${usuarioWeb.administrador }">
+							<li class="dropdown">
+        						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Gerenciar Objetos
+        						<span class="caret"></span></a>
+        						<ul class="dropdown-menu">
+									<li><a href="<c:url value="/usuario/listar"/>" title="Usuários">Usuários</a></li>
+									<li><a href="<c:url value="/perfil/listar"/>" title="Perfis">Perfis</a></li>
+									<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
+						 		</ul>
+      						</li>
+						</c:if>
+						<li><a href="<c:url value="/monografia/listar"/>" title="Monografias">Monografias</a></li>
 					</ul>
 				</div>
 			</div>

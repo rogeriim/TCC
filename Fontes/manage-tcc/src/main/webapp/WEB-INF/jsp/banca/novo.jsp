@@ -27,9 +27,11 @@
 
 				<form action="adiciona" method="POST">
 					<div class="row">
-						<div class="form-group col-sm-12">
-							<label for="resumo">Data Defesa</label> <input class="form-control"
-								id="resumo" name="monografia.resumo">
+						<div class="form-group col-sm-3">
+							<label for="resumo">Data Defesa</label> 
+							<input type="datetime-local" class="form-control" id="data" name="data" value="selected">
+							<input class="form-control" type="hidden"
+								id="matricula" name="matricula" value="${usuarioWeb.getMatricula()}">
 						</div>
 						<div class="form-group col-sm-12">
 							<label for="trabalho">Trabalho</label>
@@ -39,7 +41,6 @@
 										<c:forEach items="${estruturaBanca.trabalho}" var="trabalho">
 											<option value="${trabalho.getId() }">${trabalho.getTitulo() }</option>
 										</c:forEach>
-										<option>Selecionar Trabalho</option>
 									</select> 
 								</div>
 							</div>
@@ -52,7 +53,6 @@
 										<c:forEach items="${estruturaBanca.avaliador1}" var="avaliador1">
 											<option value="${avaliador1.getMatricula() }">${avaliador1.getNome() }</option>
 										</c:forEach>
-										<option>Selecionar Avaliador 1</option>
 									</select> 
 								</div>
 							</div>
@@ -65,7 +65,6 @@
 										<c:forEach items="${estruturaBanca.avaliador2}" var="avaliador2">
 											<option value="${avaliador2.getMatricula() }">${avaliador2.getNome() }</option>
 										</c:forEach>
-										<option>Selecionar Avaliador 2</option>
 									</select> 
 								</div>
 							</div>

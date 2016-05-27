@@ -29,6 +29,7 @@
 								<th><strong>Id</strong></th>
 								<th><strong>Titulo Trabalho</strong></th>
 								<th><strong>Orientando</strong></th>
+								<th><strong>Data defesa</strong></th>
 								<th><strong>Status</strong></th>
 								<th class="actions"><a
 									href="<c:url value="/banca/novo"/>"
@@ -40,7 +41,8 @@
 								<tr>
 									<td>Banca ${banca.getId() }</td>
 									<td>${banca.getTrabalho().getTitulo() }</td>
-									<td>${banca.getTrabalho().getOrientando()  }</td>
+									<td>${banca.getTrabalho().getOrientando().getNome()  }</td>
+									<td>${banca.getData()  }</td>
 									<td>${banca.getStatus() }</td>
 									<td class="actions">
 										<a class="btn btn-primary btn-xs" href="ver?id=${banca.getId()}">Visualizar</a> 

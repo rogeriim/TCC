@@ -42,7 +42,6 @@
 										<c:forEach items="${temaList}" var="tema">
 											<option value="${tema.getId() }"> ${tema.getTema() }</option>
 										</c:forEach>
-										<option>Selecionar Tema</option>
 									</select> <a class="btn btn-primary" href="#" data-toggle="modal"
 										id="adicionarTema">Adicionar novo Tema</a>
 								</div>
@@ -93,6 +92,7 @@
 							<label for="tema">Tema</label> 
 							<input type="text" class="form-control" id="tema" name="tema.tema" placeholder="Novo Tema">
 							<input type="hidden" name="pagina" value="novo">
+							<input type="hidden" name="matricula" value="${usuarioWeb.getMatricula() }">
 						</div>
 						<button type="submit" class="btn btn-primary btn-block">
 							Adicionar</button>

@@ -22,6 +22,8 @@ public class Banca {
 	private Usuario avaliador1;
 	@ManyToOne
 	private Usuario avaliador2;
+	@ManyToOne
+	private Usuario criadoPor;
 
 	/*
 	 * Getters and Setters
@@ -62,6 +64,12 @@ public class Banca {
 	}
 	public void setAvaliador2(Usuario avaliador2) {
 		this.avaliador2 = avaliador2;
+	}
+	public Usuario getCriadoPor() {
+		return criadoPor;
+	}
+	public void setCriadoPor(Usuario criadoPor) {
+		this.criadoPor = criadoPor;
 	}
 
 }

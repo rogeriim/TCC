@@ -18,6 +18,7 @@
 		<mapping class="br.com.tccmanager.model.Candidato" />
 		<mapping class="br.com.tccmanager.model.Monografia" />
 		<mapping class="br.com.tccmanager.model.Perfil" />
+		<mapping class="br.com.tccmanager.model.Solicitacao" />
 		<mapping class="br.com.tccmanager.model.Tema" />
 		<mapping class="br.com.tccmanager.model.Trabalho" />
 		<mapping class="br.com.tccmanager.model.Usuario" />

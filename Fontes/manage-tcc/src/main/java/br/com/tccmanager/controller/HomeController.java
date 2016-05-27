@@ -52,15 +52,11 @@ public class HomeController {
 			validator.add(new ValidationMessage("Senhas digitadas não são iguais", null));
 		}
 
-		if (usuario != null)
-			System.out.println("Matricula: " + usuario.getMatricula());
-
 		validator.onErrorRedirectTo(this).primeiroLogin(usuario);
 
-		System.out.println("senha: " + senha);
-		System.out.println("matricula: " + matricula);
-		System.out.println("senhaConfirmada: " + senhaConfirmada);
 		usuarioDao.alteraSenha(matricula, senhaConfirmada);
+		
+		usuarioWeb.login(usuario);
 
 		result.redirectTo(TrabalhoController.class).listar(matricula);
 	}
