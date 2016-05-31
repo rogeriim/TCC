@@ -38,32 +38,8 @@
 							<div class="row">
 								<div class="col-md-12 form-actions">
 									<select class="btn btn-default" name="trabalho.id">
-										<c:forEach items="${estruturaBanca.trabalho}" var="trabalho">
+										<c:forEach items="${trabalhoList }" var="trabalho">
 											<option value="${trabalho.getId() }">${trabalho.getTitulo() }</option>
-										</c:forEach>
-									</select> 
-								</div>
-							</div>
-						</div>
-						<div class="form-group col-sm-12">
-							<label for="trabalho">Avaliador 1</label>
-							<div class="row">
-								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="avaliador1.matricula">
-										<c:forEach items="${estruturaBanca.avaliador1}" var="avaliador1">
-											<option value="${avaliador1.getMatricula() }">${avaliador1.getNome() }</option>
-										</c:forEach>
-									</select> 
-								</div>
-							</div>
-						</div>
-						<div class="form-group col-sm-12">
-							<label for="trabalho">Avaliador 2</label>
-							<div class="row">
-								<div class="col-md-12 form-actions">
-									<select class="btn btn-default" name="avaliador2.matricula">
-										<c:forEach items="${estruturaBanca.avaliador2}" var="avaliador2">
-											<option value="${avaliador2.getMatricula() }">${avaliador2.getNome() }</option>
 										</c:forEach>
 									</select> 
 								</div>

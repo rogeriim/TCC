@@ -1,6 +1,7 @@
 package br.com.tccmanager.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.caelum.vraptor.Resource;
@@ -10,7 +11,6 @@ import br.com.tccmanager.dao.BancaDAO;
 import br.com.tccmanager.dao.TrabalhoDAO;
 import br.com.tccmanager.dao.UsuarioDAO;
 import br.com.tccmanager.model.Banca;
-import br.com.tccmanager.model.EstruturaBanca;
 import br.com.tccmanager.model.Trabalho;
 import br.com.tccmanager.model.Usuario;
 import br.com.tccmanager.util.DataUtil;
@@ -27,47 +27,44 @@ public class BancaController {
 	}
 
 	@Restrito
-	public List<Banca> listar() {
-		return dao.findAll();
+	public List<Banca> listar(String matricula) {
+		return dao.findAllByCriador(matricula);
 	}
 
 	@Restrito
-	public EstruturaBanca novo(String matricula) {
-		EstruturaBanca estrutura = new EstruturaBanca();
-
+	public List<Trabalho> novo(String matricula) {
+		List<Trabalho> trabalhoList = new ArrayList<Trabalho>();
 		TrabalhoDAO trabalhoDao = new TrabalhoDAO();
 
-		estrutura.setTrabalho(trabalhoDao.findAllByOrientador(matricula));
+		trabalhoList = trabalhoDao.findAllByOrientador(matricula);
 
-		UsuarioDAO usuarioDao = new UsuarioDAO();
-		estrutura.setAvaliador1(usuarioDao.findAllByPerfil("PROFESSOR"));
-		estrutura.setAvaliador2(usuarioDao.findAllByPerfil("PROFESSOR"));
-
-		return estrutura;
+		return trabalhoList;
 	}
 
 	@Restrito
+	// Banca é criada sem setar os avaliadores, para isto, devera ser criada uma solicitacao
 	public void adiciona(Banca banca, Trabalho trabalho, 
-			Usuario avaliador1, Usuario avaliador2, String data) throws ParseException {
+			String matricula, String data) throws ParseException {
+		
+		UsuarioDAO userDao = new UsuarioDAO();
 		
 		banca.setData(DataUtil.StringToDate(data));
 		banca.setStatus("ABERTO");
+		banca.setCriadoPor(userDao.find(matricula));
 		banca.setTrabalho(trabalho);
-		banca.setAvaliador1(avaliador1);
-		//TODO enviar email avaliador 1
-		banca.setAvaliador2(avaliador2);
-		//TODO enviar email avaliador 2
 
 		dao.create(banca);
-		result.redirectTo(this).listar();
+		result.redirectTo(this).listar(matricula);
 	}
 
 	@Restrito
 	public void remove(int id) {
+		String matricula = dao.find(id).getCriadoPor().getMatricula();
 		dao.remove(id);
-		result.redirectTo(this).listar();
+		result.redirectTo(this).listar(matricula);
 	}
 
+	/* TODO
 	@Restrito
 	public EstruturaBanca editar(int id) {
 		EstruturaBanca estrutura = new EstruturaBanca();
@@ -79,14 +76,14 @@ public class BancaController {
 		estrutura.setAvaliador2(usuarioDao.findAll());
 
 		return estrutura;
-	}
+	} */
 
 	@Restrito
 	public void altera(Banca banca, Usuario avaliador1, Usuario avaliador2) {
 		banca.setAvaliador1(avaliador1);
 		banca.setAvaliador2(avaliador2);	
 		dao.update(banca);
-		result.redirectTo(this).listar();
+		result.redirectTo(this).listar(banca.getCriadoPor().getMatricula());
 	}
 
 	@Restrito

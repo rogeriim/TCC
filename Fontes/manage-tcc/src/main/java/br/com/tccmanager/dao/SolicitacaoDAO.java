@@ -28,6 +28,14 @@ public class SolicitacaoDAO {
 		return getSession().createQuery("from Solicitacao").list();
 	}
 	
+	public List<Solicitacao> findAllByCriador(String matricula) {
+		return getSession().createQuery("from Solicitacao where abertoPor = " + matricula).list();
+	}
+	
+	public List<Solicitacao> findAllByProfessor(String matricula) {
+		return getSession().createQuery("from Solicitacao where professor = " + matricula).list();
+	}
+	
 	public Solicitacao find(int id) {
 		return (Solicitacao) getSession().createQuery("from Solicitacao where id = " + id)
 				.uniqueResult();

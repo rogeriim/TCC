@@ -63,6 +63,13 @@ public class UsuarioDAO {
 				+ "(select id from Perfil where perfil = " + perfil + ")").list();
 	}
 
+	public List<Usuario> findAllProfessorSolicitacaoBanca(String matricula, int bancaId) {
+		return getSession().createQuery("from Usuario where perfil_id in "
+				+ "(select id from Perfil where perfil in ('PROFESSOR' , 'ADMINISTRADOR'))"
+				+ " and matricula not in (select professor from Solicitacao where banca_id = " + bancaId + ") "
+				+ "and matricula != '" + matricula + "'").list();
+	}
+
 	public void remove(String matricula) {
 		Usuario usuario = find(matricula);
 		getSession().beginTransaction();

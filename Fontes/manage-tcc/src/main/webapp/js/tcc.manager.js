@@ -29,6 +29,17 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+	$('#responder').on('show.bs.modal', function(e) {
+		var $modal = $(this),
+		id = e.relatedTarget.id;
+
+		$(this).find("#aceitar").attr("href", "aceitar?id=" + id);
+		$(this).find("#recusar").attr("href", "recusar?id=" + id);
+
+	});
+});
+
+$(document).ready(function() {
 	$('#save-interesse-modal').on('show.bs.modal', function(e) {
 		var $modal = $(this),
 		id = e.relatedTarget.id;

@@ -41,14 +41,12 @@
 								<td>${tema.getId() }</td>
 								<td>${tema.getTema() }</td>
 								<td>${tema.getStatus() }</td>
-								<td class="actions">
-								<c:if test="${tema.getStatus() != 'APROVADO'}" >
-									<a class="btn btn-primary btn-xs"
-										href="aprovar?id=${tema.getId()}">Aprovar</a>
-								</c:if>
-								<a class="btn btn-danger btn-xs" data-toggle="modal"
-									id="${tema.getId()}" data-target="#delete-modal">Excluir</a>
-								</td>
+								<td class="actions"><c:if
+										test="${tema.getStatus() != 'APROVADO'}">
+										<a class="btn btn-primary btn-xs"
+											href="aprovar?id=${tema.getId()}">Aprovar</a>
+									</c:if> <a class="btn btn-danger btn-xs" data-toggle="modal"
+									id="${tema.getId()}" data-target="#delete-modal">Excluir</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -60,37 +58,37 @@
 		</section>
 
 		<jsp:include page="/WEB-INF/jsp/template/footer.jsp" />
-		
-		<!-- Modal -->
-	<div class="modal fade" id="novoTema" role="dialog">
-		<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header" style="padding: 35px 50px;">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4>Adicionar Tema</h4>
-				</div>
-				<div class="modal-body" style="padding: 40px 50px;">
-					<form role="form" action="adiciona" method="POST">
-						<div class="form-group">
-							<label for="tema">Tema</label> 
-							<input type="text" class="form-control" id="area" name="tema.tema" placeholder="Novo Tema">
-							<input type="hidden" name="matricula" value="${usuarioWeb.getMatricula() }">
-							<input type="hidden" name="pagina" value="novo">
-						</div>
-						<button type="submit" class="btn btn-primary btn-block">
-							Adicionar</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-danger btn-default"
-						data-dismiss="modal">Cancelar</button>
-					<a href="<c:url value="/trabalho/novo"/>"  class="btn btn-link">Voltar</a>
+		<!-- Modal -->
+		<div class="modal fade" id="novoTema" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>Adicionar Tema</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form" action="adiciona" method="POST">
+							<div class="form-group">
+								<label for="tema">Tema</label> <input type="text"
+									class="form-control" id="area" name="tema.tema"
+									placeholder="Novo Tema"> <input type="hidden"
+									name="matricula" value="${usuarioWeb.getMatricula() }">
+								<input type="hidden" name="pagina" value="novo">
+							</div>
+							<button type="submit" class="btn btn-primary btn-block">
+								Adicionar</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger btn-default"
+							data-dismiss="modal">Cancelar</button>
+						<a href="<c:url value="/trabalho/novo"/>" class="btn btn-link">Voltar</a>
+					</div>
 				</div>
 			</div>
-		 </div>
-
 		</div>
 
 		<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog"
