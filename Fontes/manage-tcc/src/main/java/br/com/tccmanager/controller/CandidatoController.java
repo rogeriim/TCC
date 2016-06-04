@@ -52,7 +52,6 @@ public class CandidatoController {
 	public void salvar(String id) {
 		List<Candidato> candidatoList = new ArrayList<Candidato>();
 		
-		System.out.println("Passou aqui: " + id);
 		candidatoList = dao.findAllByUser(id);
 		
 		for (int i = 0; i < candidatoList.size(); i++) {

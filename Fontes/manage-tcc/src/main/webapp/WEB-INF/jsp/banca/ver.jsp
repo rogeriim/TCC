@@ -43,8 +43,8 @@
 					</div>
 
 					<div class="col-sm-12">
-						<label><strong>Desenvolvido por</strong></label>
-						<p>${monografia.getTrabalho().getOrientando() }</p>
+						<label><strong>Orientando desenvolvedor</strong></label>
+						<p>${banca.getTrabalho().getOrientando().getNome() }</p>
 					</div>
 
 					<div class="row">
@@ -55,7 +55,7 @@
 
 					<div class="col-sm-12">
 						<label><strong>Orientado por</strong></label>
-						<p>${monografia.getTrabalho().getOrientador().getNome() }</p>
+						<p>${banca.getCriadoPor().getNome() }</p>
 					</div>
 
 					<div class="row">

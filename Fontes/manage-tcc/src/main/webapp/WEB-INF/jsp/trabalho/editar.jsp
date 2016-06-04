@@ -54,6 +54,8 @@
 							<label for="orientando">Orientando</label>
 							<c:if test="${empty estruturaTrabalho.candidato }" >
 								<p>Este trabalho ainda não possui alunos interessados em desenvolvê-lo</p>
+								<input class="form-control" type="hidden" id="matriculaOrientando" name="matriculaOrientando"
+									value="Nenhum"> 
 							</c:if>
 							<c:if test="${not empty estruturaTrabalho.candidato }" >
 								<div class="row">

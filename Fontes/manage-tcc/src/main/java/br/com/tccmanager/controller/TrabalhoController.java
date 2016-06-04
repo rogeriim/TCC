@@ -106,7 +106,8 @@ public class TrabalhoController {
 
 		UsuarioDAO userDao = new UsuarioDAO();
 
-		if (matriculaOrientando.equalsIgnoreCase("NENHUM"))
+		
+		if (!matriculaOrientando.equalsIgnoreCase("NENHUM"))
 			trabalho.setOrientando(userDao.find(matriculaOrientando));
 		else trabalho.setOrientador(null);
 

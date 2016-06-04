@@ -51,6 +51,8 @@ public class BancaDAO {
 
 		// TODO parametros a serem atualizados;
 		b.setStatus(banca.getStatus());
+		b.setAvaliador1(banca.getAvaliador1());
+		b.setAvaliador2(banca.getAvaliador2());
 
 		getSession().beginTransaction();
 		getSession().update(b);

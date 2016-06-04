@@ -32,7 +32,7 @@
 								<th><strong>Data defesa</strong></th>
 								<th><strong>Status</strong></th>
 								<th class="actions"><a
-									href="<c:url value="/banca/novo"/>"
+									href="<c:url value="/banca/novo?matricula=${usuarioWeb.getMatricula()}"/>"
 									class="btn btn-primary h2">Adicionar novo</a></th>
 							</tr>
 						</thead>
@@ -45,11 +45,16 @@
 									<td>${banca.getData()  }</td>
 									<td>${banca.getStatus() }</td>
 									<td class="actions">
-										<a class="btn btn-primary btn-xs" 
-											href="<c:url value="/solicitacao/criar?id=${banca.getId()}"/>" >Criar Solicitação</a> 
-										<a class="btn btn-primary btn-xs" href="ver?id=${banca.getId()}">Visualizar</a> 
-										<a class="btn btn-primary btn-xs" href="editar?id=${banca.getId()}">Editar</a> 
-										<a class="btn btn-danger btn-xs" data-toggle="modal" id="${banca.getId()}" data-target="#delete-modal">Excluir</a>
+										<c:if test="${banca.getStatus() == 'FECHADO' }"> 
+											<a class="btn btn-primary btn-xs" href="ver?id=${banca.getId()}">Visualizar</a>
+										</c:if>
+										<c:if test="${banca.getStatus() == 'ABERTO' }"> 
+											<a class="btn btn-primary btn-xs" 
+												href="<c:url value="/solicitacao/criar?id=${banca.getId()}"/>" >Criar Solicitação</a>
+											<a class="btn btn-primary btn-xs" href="fechar?id=${banca.getId()}">Fechar Banca</a>
+											<a class="btn btn-primary btn-xs" href="editar?id=${banca.getId()}">Selecionar Avaliadores</a> 
+											<a class="btn btn-danger btn-xs" data-toggle="modal" id="${banca.getId()}" data-target="#delete-modal">Excluir</a>
+										</c:if>
 									</td>
 								</tr>
 							</c:forEach>

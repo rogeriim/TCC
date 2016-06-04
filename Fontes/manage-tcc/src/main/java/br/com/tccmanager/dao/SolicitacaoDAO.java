@@ -29,11 +29,27 @@ public class SolicitacaoDAO {
 	}
 	
 	public List<Solicitacao> findAllByCriador(String matricula) {
-		return getSession().createQuery("from Solicitacao where abertoPor = " + matricula).list();
+		return getSession().createQuery("from Solicitacao s where s.abertoPor = " + matricula
+				+ " and s.banca in (select b.id from Banca b where b.status = 'ABERTO')").list();
 	}
 	
 	public List<Solicitacao> findAllByProfessor(String matricula) {
-		return getSession().createQuery("from Solicitacao where professor = " + matricula).list();
+		return getSession().createQuery("from Solicitacao s where s.professor = " + matricula
+				+ " and s.banca in (select b.id from Banca b where b.status = 'ABERTO')").list();
+	}
+	
+	/*
+	select *
+	from solicitacao s
+	where s.professor_matricula = "5"
+	and s.banca_id in (select id
+						from banca b
+	                    where b.status = "ABERTO");
+	 */
+	
+	public List<Solicitacao> findAllAceitasByBanca(int bancaId) {
+		return getSession().createQuery("from Solicitacao where banca_id = " + bancaId
+				+ " and resposta = 'SIM'").list();
 	}
 	
 	public Solicitacao find(int id) {

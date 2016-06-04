@@ -8,9 +8,12 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.tccmanager.auth.Restrito;
 import br.com.tccmanager.dao.BancaDAO;
+import br.com.tccmanager.dao.SolicitacaoDAO;
 import br.com.tccmanager.dao.TrabalhoDAO;
 import br.com.tccmanager.dao.UsuarioDAO;
 import br.com.tccmanager.model.Banca;
+import br.com.tccmanager.model.EstruturaBanca;
+import br.com.tccmanager.model.Solicitacao;
 import br.com.tccmanager.model.Trabalho;
 import br.com.tccmanager.model.Usuario;
 import br.com.tccmanager.util.DataUtil;
@@ -36,7 +39,7 @@ public class BancaController {
 		List<Trabalho> trabalhoList = new ArrayList<Trabalho>();
 		TrabalhoDAO trabalhoDao = new TrabalhoDAO();
 
-		trabalhoList = trabalhoDao.findAllByOrientador(matricula);
+		trabalhoList = trabalhoDao.findAllFechadosByProfessor(matricula);
 
 		return trabalhoList;
 	}
@@ -45,9 +48,9 @@ public class BancaController {
 	// Banca é criada sem setar os avaliadores, para isto, devera ser criada uma solicitacao
 	public void adiciona(Banca banca, Trabalho trabalho, 
 			String matricula, String data) throws ParseException {
-		
+
 		UsuarioDAO userDao = new UsuarioDAO();
-		
+
 		banca.setData(DataUtil.StringToDate(data));
 		banca.setStatus("ABERTO");
 		banca.setCriadoPor(userDao.find(matricula));
@@ -64,25 +67,48 @@ public class BancaController {
 		result.redirectTo(this).listar(matricula);
 	}
 
-	/* TODO
+	@Restrito
+	public void fechar(int id) {
+		Banca banca = dao.find(id);
+
+		banca.setStatus("FECHADO");
+		dao.update(banca);
+
+		result.redirectTo(this).listar(banca.getCriadoPor().getMatricula());
+	}
+
+	// TODO estrutura com usuarios
 	@Restrito
 	public EstruturaBanca editar(int id) {
 		EstruturaBanca estrutura = new EstruturaBanca();
 
-		estrutura.setId(id);
+		List<Usuario> professores = new ArrayList<Usuario>();
+		List<Solicitacao> solicitacao = new ArrayList<Solicitacao>();
 
 		UsuarioDAO usuarioDao = new UsuarioDAO();
-		estrutura.setAvaliador1(usuarioDao.findAll());
-		estrutura.setAvaliador2(usuarioDao.findAll());
+		SolicitacaoDAO solicitacaoDao = new SolicitacaoDAO();
+
+		solicitacao = solicitacaoDao.findAllAceitasByBanca(id);
+
+		if (solicitacao != null) {
+			for (int i = 0; i < solicitacao.size(); i++) {
+				professores.add(usuarioDao.find(solicitacao.get(i).getProfessor().getMatricula()));
+			}
+		}
+
+		estrutura.setBancaId(id);
+		estrutura.setUsuario(professores);
 
 		return estrutura;
-	} */
+	}
 
 	@Restrito
 	public void altera(Banca banca, Usuario avaliador1, Usuario avaliador2) {
 		banca.setAvaliador1(avaliador1);
-		banca.setAvaliador2(avaliador2);	
+		banca.setAvaliador2(avaliador2);
+
 		dao.update(banca);
+
 		result.redirectTo(this).listar(banca.getCriadoPor().getMatricula());
 	}
 
