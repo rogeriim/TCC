@@ -9,6 +9,9 @@ import br.com.tccmanager.dao.PerfilDAO;
 import br.com.tccmanager.dao.UsuarioDAO;
 import br.com.tccmanager.model.Perfil;
 import br.com.tccmanager.model.Usuario;
+import br.com.tccmanager.util.CriptografiaUtil;
+import br.com.tccmanager.util.EmailUtil;
+import br.com.tccmanager.util.GeradorSenhaUtil;
 
 @Resource
 public class UsuarioController {
@@ -25,7 +28,7 @@ public class UsuarioController {
 	public List<Usuario> listar() {
 		return dao.findAll();
 	}
-	
+
 	@Restrito
 	public List<Perfil> novo() {
 		PerfilDAO perfilDao = new PerfilDAO();
@@ -35,6 +38,22 @@ public class UsuarioController {
 	@Restrito
 	public void adiciona(Usuario usuario, Perfil perfil) {
 		usuario.setPerfil(perfil);
+
+		String senha = GeradorSenhaUtil.randomString(8);
+		
+		// Envia email para o usuario informando sua senha de acesso.
+		EmailUtil.sendEmail(usuario.getEmail(),
+				"[TCC] Você foi cadastrado no sistema TCC Manager",
+				"Olá, " + usuario.getNome() + "."
+						+ "<br><br>Este é um email automático para informar que você foi cadastrado no sistema TCC Manager. " 
+						+ "Para entrar no sistema, você deverá acessar o link <a href=\"http://192.168.0.108:8080/tcc-manager/home/loginForm\">"
+						+ "http://localhost:8080/tcc-manager/home/loginForm</a> de seu brower e utilizar os seguintes dados: "
+						+ "<br><br><b>Usuario: </b>" + usuario.getMatricula()
+						+ "<br><b>Senha: </b>" + senha
+						+ "<br><br>Att.");
+
+		usuario.setSenha(CriptografiaUtil.criptografar(senha));
+
 		dao.create(usuario);
 		result.redirectTo(this).listar();
 	}

@@ -77,12 +77,12 @@ public class BancaController {
 		result.redirectTo(this).listar(banca.getCriadoPor().getMatricula());
 	}
 
-	// TODO estrutura com usuarios
 	@Restrito
 	public EstruturaBanca editar(int id) {
 		EstruturaBanca estrutura = new EstruturaBanca();
 
-		List<Usuario> professores = new ArrayList<Usuario>();
+		List<Usuario> avaliador1 = new ArrayList<Usuario>();
+		List<Usuario> avaliador2 = new ArrayList<Usuario>();
 		List<Solicitacao> solicitacao = new ArrayList<Solicitacao>();
 
 		UsuarioDAO usuarioDao = new UsuarioDAO();
@@ -90,22 +90,31 @@ public class BancaController {
 
 		solicitacao = solicitacaoDao.findAllAceitasByBanca(id);
 
+		// Dividindo a lista de professores..
 		if (solicitacao != null) {
 			for (int i = 0; i < solicitacao.size(); i++) {
-				professores.add(usuarioDao.find(solicitacao.get(i).getProfessor().getMatricula()));
+				if ((i % 2) == 0)
+					avaliador1.add(usuarioDao.find(solicitacao.get(i).getProfessor().getMatricula()));
+				else avaliador2.add(usuarioDao.find(solicitacao.get(i).getProfessor().getMatricula()));
 			}
 		}
 
-		estrutura.setBancaId(id);
-		estrutura.setUsuario(professores);
+		estrutura.setBanca(dao.find(id));
+		estrutura.setAvaliador1(avaliador1);
+		estrutura.setAvaliador2(avaliador2);
 
 		return estrutura;
 	}
 
 	@Restrito
-	public void altera(Banca banca, Usuario avaliador1, Usuario avaliador2) {
-		banca.setAvaliador1(avaliador1);
-		banca.setAvaliador2(avaliador2);
+	public void altera(Banca banca, Usuario avaliador1, Usuario avaliador2, String data) {
+		
+		if (avaliador1.getNome() != null)
+			banca.setAvaliador1(avaliador1);
+		if (avaliador2.getNome() != null)
+			banca.setAvaliador2(avaliador2);
+		if (data != null)
+			banca.setData(DataUtil.StringToDate(data));
 
 		dao.update(banca);
 

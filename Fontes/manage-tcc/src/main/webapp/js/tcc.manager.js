@@ -29,6 +29,16 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+	$('#close-modal').on('show.bs.modal', function(e) {
+		var $modal = $(this),
+		id = e.relatedTarget.id;
+
+		$(this).find("#fechar").attr("href", "fechar?id=" + id);
+
+	});
+});
+
+$(document).ready(function() {
 	$('#responder').on('show.bs.modal', function(e) {
 		var $modal = $(this),
 		id = e.relatedTarget.id;

@@ -29,7 +29,7 @@ public class BancaDAO {
 	public List<Banca> findAll() {
 		return getSession().createQuery("from Banca").list();
 	}
-	
+
 	public List<Banca> findAllByCriador(String matricula) {
 		return getSession().createQuery("from Banca where criadoPor = " + matricula).list();
 	}
@@ -50,7 +50,10 @@ public class BancaDAO {
 		Banca b = find(banca.getId());
 
 		// TODO parametros a serem atualizados;
-		b.setStatus(banca.getStatus());
+		if (banca.getData() != null)
+			b.setData(banca.getData());
+		if (banca.getStatus() != null)
+			b.setStatus(banca.getStatus());
 		b.setAvaliador1(banca.getAvaliador1());
 		b.setAvaliador2(banca.getAvaliador2());
 

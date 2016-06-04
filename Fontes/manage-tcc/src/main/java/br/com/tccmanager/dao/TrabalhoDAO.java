@@ -40,7 +40,8 @@ public class TrabalhoDAO {
 	
 	public List<Trabalho> findAllFechadosByProfessor(String matricula) {
 		return getSession().createQuery("from Trabalho where orientador = " + matricula
-				+ " and status = 'FECHADO'").list();
+				+ " and status = 'FECHADO' and id not in "
+				+ "(select trabalho from Banca where status = 'FECHADO')").list();
 	}
 
 	public Trabalho find(int id) {
