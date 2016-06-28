@@ -20,7 +20,7 @@
 
 				<div id="top" class="row">
 					<div class="col-sm-6" align="center">
-						<h2>Solicitações abertas</h2>
+						<h2>Solicitações pendentes</h2>
 					</div>
 				</div>
 

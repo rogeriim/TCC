@@ -27,22 +27,22 @@
 
 				<form action="adiciona" method="POST">
 					<div class="row">
-						<div class="form-group col-sm-12">
+						<div class="form-group col-sm-8">
 							<label for="matricula">Matrícula</label> <input class="form-control"
 								id="matricula" name="usuario.matricula">
 						</div>
-						<div class="form-group col-sm-12">
+						<div class="form-group col-sm-8">
 							<label for="email">E-mail</label> <input class="form-control"
 								id="email" name="usuario.email">
 						</div>
-						<div class="form-group col-sm-12">
+						<div class="form-group col-sm-8">
 							<label for="nome">Nome</label> <input class="form-control"
 								id="nome" name="usuario.nome">
 						</div>
-						<div class="form-group col-sm-12">
+						<div class="form-group col-sm-8">
 							<label for="perfil">Perfil</label>
 							<div class="row">
-								<div class="col-md-12 form-actions">
+								<div class="col-md-8 form-actions">
 									<select class="btn btn-default" name="perfil.id">
 										<c:forEach items="${perfilList}" var="perfil">
 											<option value="${perfil.getId() }"> ${perfil.getPerfil() }</option>
@@ -57,7 +57,7 @@
 					<hr />
 
 					<div class="row">
-						<div class="col-md-12 form-actions">
+						<div class="col-md-8 form-actions">
 							<button type="submit" class="btn btn-primary">Adicionar</button>
 							<button type="reset" class="btn btn-default">Limpar</button>
 							<a href="trabalhos.html" class="btn btn-link">Voltar</a>

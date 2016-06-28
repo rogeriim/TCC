@@ -109,9 +109,9 @@ public class BancaController {
 	@Restrito
 	public void altera(Banca banca, Usuario avaliador1, Usuario avaliador2, String data) {
 		
-		if (avaliador1.getNome() != null)
+		if (avaliador1.getMatricula() != null)
 			banca.setAvaliador1(avaliador1);
-		if (avaliador2.getNome() != null)
+		if (avaliador2.getMatricula() != null)
 			banca.setAvaliador2(avaliador2);
 		if (data != null)
 			banca.setData(DataUtil.StringToDate(data));

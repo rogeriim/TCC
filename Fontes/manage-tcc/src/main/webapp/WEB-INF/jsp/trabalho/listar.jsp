@@ -30,7 +30,6 @@
 						<tr>
 							<th><strong>Título</strong></th>
 							<c:if test="${usuarioWeb.professor || usuarioWeb.administrador }">
-								<th><strong>Data</strong></th>
 								<th><strong>Status</strong></th>
 								<th><strong>Orientando</strong></th>
 							</c:if>
@@ -50,7 +49,6 @@
 							<tr>
 								<td>${trabalho.getTitulo() }</td>
 								<c:if test="${usuarioWeb.professor || usuarioWeb.administrador }">
-									<td>${trabalho.getData() }</td>
 									<td>${trabalho.getStatus() }</td>
 									<td>
 										<c:if test="${empty trabalho.getOrientando().getNome() }">

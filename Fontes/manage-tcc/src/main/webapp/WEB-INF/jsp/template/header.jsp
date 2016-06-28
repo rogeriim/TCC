@@ -11,10 +11,7 @@
 				title="Gerenciador de TCC | FACOM" /></a>
 		</h1>
 
-		<c:if test="${usuarioWeb.logado}">
-      		Olá, ${usuarioWeb.nome }! 
-      		<a href="<c:url value="/logout"/>">Logout</a>
-    	</c:if>
+
 	</div>
 
 	<c:if test="${(usuarioWeb.logado and !usuarioWeb.primeiroAcesso)}">
@@ -68,8 +65,8 @@
 									<li><a href="<c:url value="/tema/listar"/>" title="Temas">Temas</a></li>
 								</ul></li>
 						</c:if>
-						<li><a href="<c:url value="/monografia/listar"/>"
-							title="Monografias">Monografias</a></li>
+						<!--li><a href="<c:url value="/monografia/listar"/>"
+							title="Monografias">Monografias</a></li-->
 					</ul>
 				</div>
 			</div>
