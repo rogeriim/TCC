@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.tccmanager.auth.UsuarioWeb;
 import br.com.tccmanager.dao.UsuarioDAO;
+import br.com.tccmanager.init.InitDB;
 import br.com.tccmanager.model.Usuario;
 
 @Resource
@@ -26,6 +27,7 @@ public class HomeController {
 	}
 
 	public void loginForm() {
+		InitDB.initDB();
 	}
 
 	public void login(Usuario usuario) {
